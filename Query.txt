@@ -1,0 +1,482 @@
+### users Table — Dummy Records   :
+
+INSERT INTO users (id, name, email, profile_image, gender, age, dob, is_admin, password, created_at, updated_at) VALUES
+(1, 'Saurabh Shukla', 'saurabh.shukla@example.com', 'saurabh.jpg', 'male', 30, '1993-11-24', 1, bcrypt('123456'), now(), now()),
+(2, 'Anjali Verma', 'anjali.verma@example.com', 'anjali.jpg', 'female', 28, '1995-02-15', 0, bcrypt('123456'), now(), now()),
+(3, 'Rahul Mehta', 'rahul.mehta@example.com', NULL, 'male', 35, '1988-08-10', 0, bcrypt('123456'), now(), now()),
+(4, 'Priya Singh', 'priya.singh@example.com', 'priya.jpg', 'female', 26, '1997-07-01', 0, bcrypt('123456'), now(), now()),
+(5, 'Amit Jain', 'amit.jain@example.com', NULL, 'male', 40, '1983-01-22', 0, bcrypt('123456'), now(), now()),
+(6, 'Meena Sharma', 'meena.sharma@example.com', 'meena.png', 'female', 31, '1992-05-11', 0, bcrypt('123456'), now(), now()),
+(7, 'Ravi Kapoor', 'ravi.kapoor@example.com', NULL, 'male', 29, '1994-03-08', 0, bcrypt('123456'), now(), now()),
+(8, 'Sneha Rao', 'sneha.rao@example.com', 'sneha.jpg', 'female', 32, '1991-09-20', 0, bcrypt('123456'), now(), now()),
+(9, 'Vikas Nair', 'vikas.nair@example.com', 'vikas.png', 'male', 33, '1990-06-17', 0, bcrypt('123456'), now(), now()),
+(10, 'Tanya Malik', 'tanya.malik@example.com', NULL, 'female', 27, '1996-12-30', 0, bcrypt('123456'), now(), now());
+
+
+
+### posts Table — Dummy Records  :
+
+INSERT INTO posts (user_id, title, content, image, status, created_at, updated_at) VALUES
+(1, 'Top 5 Laravel Tips', 'Here are some tips to optimize your Laravel app...', 'laravel-tips.jpg', 'published', now(), now()),
+(2, 'New Fashion Trends 2025', 'Explore the latest trends in Indian fashion...', 'fashion.jpg', 'published', now(), now()),
+(3, 'React vs Vue', 'A comparison between React and Vue in 2025...', NULL, 'draft', now(), now()),
+(4, 'Why You Should Learn Tailwind CSS', 'Tailwind is growing in popularity. Here’s why...', 'tailwind.jpg', 'published', now(), now()),
+(5, 'How to Start a YouTube Channel', 'Get started with video content the right way...', NULL, 'draft', now(), now()),
+(6, 'Top Places to Visit in Goa', 'From beaches to forts, Goa has it all...', 'goa.jpg', 'published', now(), now()),
+(7, 'Healthy Diet Plan for Working Professionals', 'Nutrition tips for busy people...', 'diet.jpg', 'published', now(), now()),
+(8, 'Best Laptops for Developers in 2025', 'Performance, battery, price breakdown...', NULL, 'draft', now(), now()),
+(9, 'How to Freelance as a Designer', 'Tips from my personal journey...', 'freelance.jpg', 'published', now(), now()),
+(10, 'Benefits of Meditation Daily', 'Mental health, focus, calmness — all benefits...', 'meditation.jpg', 'published', now(), now());
+
+
+
+###  comments Table — Dummy Records  :
+
+INSERT INTO comments (post_id, user_id, comment, created_at, updated_at) VALUES
+(1, 2, 'Great tips! Helped me a lot.', now(), now()),
+(1, 3, 'Thanks for sharing.', now(), now()),
+(2, 4, 'Loved the outfit ideas!', now(), now()),
+(2, 5, 'Informative and trendy.', now(), now()),
+(3, 6, 'Still love React more!', now(), now()),
+(4, 7, 'Tailwind has made my life easier.', now(), now()),
+(5, 8, 'Starting mine soon. Wish me luck!', now(), now()),
+(6, 9, 'Goa is magical!', now(), now()),
+(7, 10, 'Exactly what I needed. Thanks!', now(), now()),
+(10, 1, 'Meditation changed my mornings!', now(), now());
+
+
+
+----------------------------------------------------------------------
+
+create seeder for the same >>
+
+Here’s how to create **seeders** for the `users`, `posts`, and `comments` tables in Laravel. These seeders will populate your database with the dummy data you requested earlier.
+
+---
+
+## ✅ Step 1: Generate the Seeders
+
+In terminal, run:
+
+```bash
+php artisan make:seeder UsersTableSeeder
+php artisan make:seeder PostsTableSeeder
+php artisan make:seeder CommentsTableSeeder
+```
+
+---
+
+## ✅ Step 2: Fill Each Seeder
+
+### 🔹 `database/seeders/UsersTableSeeder.php`
+
+```php
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+
+class UsersTableSeeder extends Seeder
+{
+    public function run(): void
+    {
+        DB::table('users')->insert([
+            [
+                'id' => 1,
+                'name' => 'Saurabh Shukla',
+                'email' => 'saurabh.shukla@example.com',
+                'profile_image' => 'saurabh.jpg',
+                'gender' => 'male',
+                'age' => 30,
+                'dob' => '1993-11-24',
+                'is_admin' => 1,
+                'password' => Hash::make('123456'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 2,
+                'name' => 'Anjali Verma',
+                'email' => 'anjali.verma@example.com',
+                'profile_image' => 'anjali.jpg',
+                'gender' => 'female',
+                'age' => 28,
+                'dob' => '1995-02-15',
+                'is_admin' => 0,
+                'password' => Hash::make('123456'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 3,
+                'name' => 'Rahul Mehta',
+                'email' => 'rahul.mehta@example.com',
+                'profile_image' => null,
+                'gender' => 'male',
+                'age' => 35,
+                'dob' => '1988-08-10',
+                'is_admin' => 0,
+                'password' => Hash::make('123456'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 4,
+                'name' => 'Priya Singh',
+                'email' => 'priya.singh@example.com',
+                'profile_image' => 'priya.jpg',
+                'gender' => 'female',
+                'age' => 26,
+                'dob' => '1997-07-01',
+                'is_admin' => 0,
+                'password' => Hash::make('123456'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 5,
+                'name' => 'Amit Jain',
+                'email' => 'amit.jain@example.com',
+                'profile_image' => null,
+                'gender' => 'male',
+                'age' => 40,
+                'dob' => '1983-01-22',
+                'is_admin' => 0,
+                'password' => Hash::make('123456'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 6,
+                'name' => 'Meena Sharma',
+                'email' => 'meena.sharma@example.com',
+                'profile_image' => 'meena.png',
+                'gender' => 'female',
+                'age' => 31,
+                'dob' => '1992-05-11',
+                'is_admin' => 0,
+                'password' => Hash::make('123456'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 7,
+                'name' => 'Ravi Kapoor',
+                'email' => 'ravi.kapoor@example.com',
+                'profile_image' => null,
+                'gender' => 'male',
+                'age' => 29,
+                'dob' => '1994-03-08',
+                'is_admin' => 0,
+                'password' => Hash::make('123456'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 8,
+                'name' => 'Sneha Rao',
+                'email' => 'sneha.rao@example.com',
+                'profile_image' => 'sneha.jpg',
+                'gender' => 'female',
+                'age' => 32,
+                'dob' => '1991-09-20',
+                'is_admin' => 0,
+                'password' => Hash::make('123456'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 9,
+                'name' => 'Vikas Nair',
+                'email' => 'vikas.nair@example.com',
+                'profile_image' => 'vikas.png',
+                'gender' => 'male',
+                'age' => 33,
+                'dob' => '1990-06-17',
+                'is_admin' => 0,
+                'password' => Hash::make('123456'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 10,
+                'name' => 'Tanya Malik',
+                'email' => 'tanya.malik@example.com',
+                'profile_image' => null,
+                'gender' => 'female',
+                'age' => 27,
+                'dob' => '1996-12-30',
+                'is_admin' => 0,
+                'password' => Hash::make('123456'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ]);
+    }
+}
+```
+
+---
+
+### 🔹 `database/seeders/PostsTableSeeder.php`
+
+```php
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class PostsTableSeeder extends Seeder
+{
+    public function run(): void
+    {
+        DB::table('posts')->insert([
+            ['user_id' => 1, 'title' => 'Top 5 Laravel Tips', 'content' => 'Here are some tips...', 'image' => 'laravel-tips.jpg', 'status' => 'published', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 2, 'title' => 'New Fashion Trends 2025', 'content' => 'Explore trends...', 'image' => 'fashion.jpg', 'status' => 'published', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 3, 'title' => 'React vs Vue', 'content' => 'Comparison in 2025...', 'image' => null, 'status' => 'draft', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 4, 'title' => 'Why Tailwind CSS', 'content' => 'Tailwind is amazing...', 'image' => 'tailwind.jpg', 'status' => 'published', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 5, 'title' => 'Start a YouTube Channel', 'content' => 'Get started with video...', 'image' => null, 'status' => 'draft', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 6, 'title' => 'Places to Visit in Goa', 'content' => 'Beaches, forts...', 'image' => 'goa.jpg', 'status' => 'published', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 7, 'title' => 'Healthy Diet Plan', 'content' => 'Nutrition tips...', 'image' => 'diet.jpg', 'status' => 'published', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 8, 'title' => 'Best Laptops for Devs', 'content' => 'Performance review...', 'image' => null, 'status' => 'draft', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 9, 'title' => 'Freelance as Designer', 'content' => 'My journey...', 'image' => 'freelance.jpg', 'status' => 'published', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 10, 'title' => 'Benefits of Meditation', 'content' => 'Mental health benefits...', 'image' => 'meditation.jpg', 'status' => 'published', 'created_at' => now(), 'updated_at' => now()],
+        ]);
+    }
+}
+```
+
+---
+
+### 🔹 `database/seeders/CommentsTableSeeder.php`
+
+```php
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class CommentsTableSeeder extends Seeder
+{
+    public function run(): void
+    {
+        DB::table('comments')->insert([
+            ['post_id' => 1, 'user_id' => 2, 'comment' => 'Great tips! Helped me a lot.', 'created_at' => now(), 'updated_at' => now()],
+            ['post_id' => 1, 'user_id' => 3, 'comment' => 'Thanks for sharing.', 'created_at' => now(), 'updated_at' => now()],
+            ['post_id' => 2, 'user_id' => 4, 'comment' => 'Loved the outfit ideas!', 'created_at' => now(), 'updated_at' => now()],
+            ['post_id' => 2, 'user_id' => 5, 'comment' => 'Informative and trendy.', 'created_at' => now(), 'updated_at' => now()],
+            ['post_id' => 3, 'user_id' => 6, 'comment' => 'Still love React more!', 'created_at' => now(), 'updated_at' => now()],
+            ['post_id' => 4, 'user_id' => 7, 'comment' => 'Tailwind has made my life easier.', 'created_at' => now(), 'updated_at' => now()],
+            ['post_id' => 5, 'user_id' => 8, 'comment' => 'Starting mine soon. Wish me luck!', 'created_at' => now(), 'updated_at' => now()],
+            ['post_id' => 6, 'user_id' => 9, 'comment' => 'Goa is magical!', 'created_at' => now(), 'updated_at' => now()],
+            ['post_id' => 7, 'user_id' => 10, 'comment' => 'Exactly what I needed. Thanks!', 'created_at' => now(), 'updated_at' => now()],
+            ['post_id' => 10, 'user_id' => 1, 'comment' => 'Meditation changed my mornings!', 'created_at' => now(), 'updated_at' => now()],
+        ]);
+    }
+}
+```
+
+---
+
+## ✅ Step 3: Update `DatabaseSeeder.php`
+
+Edit `database/seeders/DatabaseSeeder.php`:
+
+```php
+public function run(): void
+{
+    $this->call([
+        UsersTableSeeder::class,
+        PostsTableSeeder::class,
+        CommentsTableSeeder::class,
+    ]);
+}
+```
+
+---
+
+## ✅ Step 4: Run the Seeders
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+This will drop existing tables, recreate them, and populate with dummy records.
+
+---
+
+Would you like me to also create **factories** or **API resources/controllers** for these models?
+
+
+
+------------------------------------------------------------------------------
+Here's the complete setup for **Category**, **SubCategory**, and **Product** seeders** with realistic demo data**, and how to call them via `DatabaseSeeder.php`.
+
+---
+
+### ✅ Step 1: **CategorySeeder**
+
+```php
+// database/seeders/CategorySeeder.php
+
+namespace Database\Seeders;
+
+use App\Models\Category;
+use Illuminate\Database\Seeder;
+
+class CategorySeeder extends Seeder
+{
+    public function run(): void
+    {
+        $categories = [
+            ['name' => 'Furniture', 'description' => 'Furniture'],
+            ['name' => 'Electronics', 'description' => 'Electronics'],
+            ['name' => 'Lighting', 'description' => 'Lighting'],
+            ['name' => 'Appliances', 'description' => 'Appliances'],
+            ['name' => 'Decor', 'description' => 'Home Decor'],
+            ['name' => 'Outdoor', 'description' => 'Outdoor Items'],
+            ['name' => 'Storage', 'description' => 'Storage Solutions'],
+            ['name' => 'Bedding', 'description' => 'Bedding Items'],
+            ['name' => 'Office', 'description' => 'Office Furniture'],
+            ['name' => 'Kids', 'description' => 'Kids Furniture'],
+        ];
+
+        foreach ($categories as $cat) {
+            Category::create($cat);
+        }
+    }
+}
+```
+
+---
+
+### ✅ Step 2: **SubCategorySeeder**
+
+```php
+// database/seeders/SubCategorySeeder.php
+
+namespace Database\Seeders;
+
+use App\Models\Subcategory;
+use Illuminate\Database\Seeder;
+
+class SubCategorySeeder extends Seeder
+{
+    public function run(): void
+    {
+        $subcategories = [
+            ['category_id' => 1, 'name' => 'Sofas', 'description' => 'Sofas and couches'],
+            ['category_id' => 1, 'name' => 'Chairs', 'description' => 'Chairs'],
+            ['category_id' => 2, 'name' => 'TVs', 'description' => 'Televisions'],
+            ['category_id' => 2, 'name' => 'Laptops', 'description' => 'Laptops and Computers'],
+            ['category_id' => 3, 'name' => 'Lighting_1', 'description' => 'Lighting'],
+            ['category_id' => 3, 'name' => 'Ceiling Lights', 'description' => 'Ceiling lighting'],
+            ['category_id' => 4, 'name' => 'Microwaves', 'description' => 'Microwave ovens'],
+            ['category_id' => 4, 'name' => 'Refrigerators', 'description' => 'Fridges'],
+            ['category_id' => 5, 'name' => 'Wall Art', 'description' => 'Art and frames'],
+            ['category_id' => 5, 'name' => 'Clocks', 'description' => 'Wall and desk clocks'],
+        ];
+
+        foreach ($subcategories as $sub) {
+            Subcategory::create($sub);
+        }
+    }
+}
+```
+
+---
+
+### ✅ Step 3: **ProductSeeder**
+
+```php
+// database/seeders/ProductSeeder.php
+
+namespace Database\Seeders;
+
+use App\Models\Product;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
+class ProductSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $products = [
+            ['name' => '9-1 Seater Sofa', 'description' => 'Sofa is good one things', 'price' => 89600.00, 'category_id' => 1, 'subcategory_id' => 1],
+            ['name' => '3-Seater Sofa', 'description' => 'Comfortable for a family', 'price' => 50000.00, 'category_id' => 1, 'subcategory_id' => 1],
+            ['name' => 'LED TV 55 Inch', 'description' => 'Smart LED TV', 'price' => 65000.00, 'category_id' => 2, 'subcategory_id' => 3],
+            ['name' => 'MacBook Pro', 'description' => 'Apple Laptop 13 inch', 'price' => 120000.00, 'category_id' => 2, 'subcategory_id' => 4],
+            ['name' => 'Modern Wall Light', 'description' => 'Stylish wall light', 'price' => 3000.00, 'category_id' => 3, 'subcategory_id' => 5],
+            ['name' => 'Microwave Oven', 'description' => '20L microwave oven', 'price' => 6000.00, 'category_id' => 4, 'subcategory_id' => 7],
+            ['name' => 'Refrigerator Double Door', 'description' => '250L capacity', 'price' => 15000.00, 'category_id' => 4, 'subcategory_id' => 8],
+            ['name' => 'Wooden Wall Clock', 'description' => 'Antique style wall clock', 'price' => 2500.00, 'category_id' => 5, 'subcategory_id' => 10],
+            ['name' => 'Ceiling Light', 'description' => 'LED ceiling light', 'price' => 4500.00, 'category_id' => 3, 'subcategory_id' => 6],
+            ['name' => 'Office Chair', 'description' => 'Ergonomic design', 'price' => 7000.00, 'category_id' => 9, 'subcategory_id' => 2],
+        ];
+
+        // Loop multiple times to reach 30 records
+        for ($i = 0; $i < 3; $i++) {
+            foreach ($products as $prod) {
+                $prod['slug'] = Str::slug($prod['name']) . '-' . uniqid();
+                $prod['status'] = 'active';
+                Product::create($prod);
+            }
+        }
+    }
+}
+```
+
+---
+
+### ✅ Step 4: **Update `DatabaseSeeder` to call all seeders**
+
+```php
+// database/seeders/DatabaseSeeder.php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $this->call([
+            CategorySeeder::class,
+            SubCategorySeeder::class,
+            ProductSeeder::class,
+        ]);
+    }
+}
+```
+
+---
+
+### ✅ Step 5: Run the Seeder
+
+```bash
+php artisan db:seed
+```
+
+If you want to refresh all data before seeding (clears tables and reseeds):
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+---
+
+Let me know if you'd like to:
+- Include **factories** instead
+- Add **images** or randomize fields
+- Automatically attach seeded users/comments/posts
+
+I'll help you polish it further.

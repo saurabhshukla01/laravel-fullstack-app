@@ -1,0 +1,3032 @@
+{
+	"info": {
+		"_postman_id": "65a4e299-5ae2-4c2f-9471-23e2cc8ae6e2",
+		"name": "E-com APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6795355"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Add Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Lighting\",\r\n    \"description\":\"Lighting\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/categories",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "add category response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Furniture\",\r\n    \"description\":\"Furniture\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 04:50:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Category created successfully.\",\n    \"data\": {\n        \"name\": \"Furniture\",\n        \"description\": \"Furniture\",\n        \"updated_at\": \"2025-05-01T04:50:40.000000Z\",\n        \"created_at\": \"2025-05-01T04:50:40.000000Z\",\n        \"id\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Lighting_1\",\r\n    \"description\":\"Lighting\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/categories/6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Category",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Lighting_1\",\r\n    \"description\":\"Lighting\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories/6",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 04:55:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Category updated successfully.\",\n    \"data\": {\n        \"id\": 6,\n        \"name\": \"Lighting_1\",\n        \"description\": \"Lighting\",\n        \"created_at\": \"2025-05-01T04:54:37.000000Z\",\n        \"updated_at\": \"2025-05-01T04:55:46.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Show Category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/categories/6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Show Category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories/6",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 04:56:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Category fetched successfully.\",\n    \"data\": {\n        \"id\": 6,\n        \"name\": \"Lighting_1\",\n        \"description\": \"Lighting\",\n        \"created_at\": \"2025-05-01T04:54:37.000000Z\",\n        \"updated_at\": \"2025-05-01T04:55:46.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/categories/6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Category Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories/6",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 05:05:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Category deleted successfully.\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/categories",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Category Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/categories",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 04:57:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Categories fetched successfully.\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Furniture\",\n            \"description\": \"Furniture\",\n            \"created_at\": \"2025-05-01T04:50:40.000000Z\",\n            \"updated_at\": \"2025-05-01T04:50:40.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Home Decor\",\n            \"description\": \"Home Decor\",\n            \"created_at\": \"2025-05-01T04:53:14.000000Z\",\n            \"updated_at\": \"2025-05-01T04:53:14.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Kitchen & Dining\",\n            \"description\": \"Kitchen & Dining\",\n            \"created_at\": \"2025-05-01T04:53:35.000000Z\",\n            \"updated_at\": \"2025-05-01T04:53:35.000000Z\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Home Improvement\",\n            \"description\": \"Home Improvement\",\n            \"created_at\": \"2025-05-01T04:53:57.000000Z\",\n            \"updated_at\": \"2025-05-01T04:53:57.000000Z\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Storage & Organization\",\n            \"description\": \"Storage & Organization\",\n            \"created_at\": \"2025-05-01T04:54:15.000000Z\",\n            \"updated_at\": \"2025-05-01T04:54:15.000000Z\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Lighting_1\",\n            \"description\": \"Lighting\",\n            \"created_at\": \"2025-05-01T04:54:37.000000Z\",\n            \"updated_at\": \"2025-05-01T04:55:46.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Add User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Saurabh Shukla\",\r\n    \"email\": \"saurabh.shukla_1@example.com\",\r\n    \"profile_image\": \"saurabh.jpg\",\r\n    \"gender\": \"male\",\r\n    \"age\": 30,\r\n    \"dob\": \"1993-11-24\",\r\n    \"is_admin\": 1,\r\n    \"password\": 123456\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add User Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Saurabh Shukla\",\r\n    \"email\": \"saurabh.shukla_1@example.com\",\r\n    \"profile_image\": \"saurabh.jpg\",\r\n    \"gender\": \"male\",\r\n    \"age\": 30,\r\n    \"dob\": \"1993-11-24\",\r\n    \"is_admin\": 1,\r\n    \"password\": 123456\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/users",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:26:22 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User created successfully.\",\n    \"data\": {\n        \"name\": \"Saurabh Shukla\",\n        \"email\": \"saurabh.shukla_1@example.com\",\n        \"profile_image\": \"saurabh.jpg\",\n        \"gender\": \"male\",\n        \"age\": 30,\n        \"dob\": \"1993-11-24\",\n        \"is_admin\": 1,\n        \"updated_at\": \"2025-05-01T07:26:22.000000Z\",\n        \"created_at\": \"2025-05-01T07:26:22.000000Z\",\n        \"id\": 11\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Saurabh Shukla\",\r\n    \"email\": \"saurabh.shukla_1@example.com\",\r\n    \"profile_image\": \"saurabh_1.jpg\",\r\n    \"gender\": \"male\",\r\n    \"age\": 30,\r\n    \"dob\": \"1993-11-24\",\r\n    \"is_admin\": 1,\r\n    \"password\": 123456\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update User",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Saurabh Shukla\",\r\n    \"email\": \"saurabh.shukla_1@example.com\",\r\n    \"profile_image\": \"saurabh_1.jpg\",\r\n    \"gender\": \"male\",\r\n    \"age\": 30,\r\n    \"dob\": \"1993-11-24\",\r\n    \"is_admin\": 1,\r\n    \"password\": 123456\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/users/11",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"users",
+										"11"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:29:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User updated successfully.\",\n    \"data\": {\n        \"id\": 11,\n        \"name\": \"Saurabh Shukla\",\n        \"email\": \"saurabh.shukla_1@example.com\",\n        \"profile_image\": \"saurabh_1.jpg\",\n        \"gender\": \"male\",\n        \"age\": 30,\n        \"dob\": \"1993-11-24\",\n        \"is_admin\": 1,\n        \"email_verified_at\": null,\n        \"created_at\": \"2025-05-01T07:26:22.000000Z\",\n        \"updated_at\": \"2025-05-01T07:29:54.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Show User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Show User",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/users/11",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"users",
+										"11"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:30:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User fetched successfully.\",\n    \"data\": {\n        \"id\": 11,\n        \"name\": \"Saurabh Shukla\",\n        \"email\": \"saurabh.shukla_1@example.com\",\n        \"profile_image\": \"saurabh_1.jpg\",\n        \"gender\": \"male\",\n        \"age\": 30,\n        \"dob\": \"1993-11-24\",\n        \"is_admin\": 1,\n        \"email_verified_at\": null,\n        \"created_at\": \"2025-05-01T07:26:22.000000Z\",\n        \"updated_at\": \"2025-05-01T07:29:54.000000Z\",\n        \"posts\": []\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete User",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/users/11",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"users",
+										"11"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:33:39 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User deleted successfully.\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/users",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:32:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Users fetched successfully.\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Saurabh Shukla\",\n            \"email\": \"saurabh.shukla@example.com\",\n            \"profile_image\": \"saurabh.jpg\",\n            \"gender\": \"male\",\n            \"age\": 30,\n            \"dob\": \"1993-11-24\",\n            \"is_admin\": 1,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-04-30T16:44:34.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:34.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Anjali Verma\",\n            \"email\": \"anjali.verma@example.com\",\n            \"profile_image\": \"anjali.jpg\",\n            \"gender\": \"female\",\n            \"age\": 28,\n            \"dob\": \"1995-02-15\",\n            \"is_admin\": 0,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-04-30T16:44:35.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:35.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Rahul Mehta\",\n            \"email\": \"rahul.mehta@example.com\",\n            \"profile_image\": null,\n            \"gender\": \"male\",\n            \"age\": 35,\n            \"dob\": \"1988-08-10\",\n            \"is_admin\": 0,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-04-30T16:44:35.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:35.000000Z\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Priya Singh\",\n            \"email\": \"priya.singh@example.com\",\n            \"profile_image\": \"priya.jpg\",\n            \"gender\": \"female\",\n            \"age\": 26,\n            \"dob\": \"1997-07-01\",\n            \"is_admin\": 0,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-04-30T16:44:36.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:36.000000Z\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Amit Jain\",\n            \"email\": \"amit.jain@example.com\",\n            \"profile_image\": null,\n            \"gender\": \"male\",\n            \"age\": 40,\n            \"dob\": \"1983-01-22\",\n            \"is_admin\": 0,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-04-30T16:44:37.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:37.000000Z\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Meena Sharma\",\n            \"email\": \"meena.sharma@example.com\",\n            \"profile_image\": \"meena.png\",\n            \"gender\": \"female\",\n            \"age\": 31,\n            \"dob\": \"1992-05-11\",\n            \"is_admin\": 0,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-04-30T16:44:37.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:37.000000Z\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Ravi Kapoor\",\n            \"email\": \"ravi.kapoor@example.com\",\n            \"profile_image\": null,\n            \"gender\": \"male\",\n            \"age\": 29,\n            \"dob\": \"1994-03-08\",\n            \"is_admin\": 0,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-04-30T16:44:38.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:38.000000Z\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Sneha Rao\",\n            \"email\": \"sneha.rao@example.com\",\n            \"profile_image\": \"sneha.jpg\",\n            \"gender\": \"female\",\n            \"age\": 32,\n            \"dob\": \"1991-09-20\",\n            \"is_admin\": 0,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-04-30T16:44:38.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:38.000000Z\"\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Vikas Nair\",\n            \"email\": \"vikas.nair@example.com\",\n            \"profile_image\": \"vikas.png\",\n            \"gender\": \"male\",\n            \"age\": 33,\n            \"dob\": \"1990-06-17\",\n            \"is_admin\": 0,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-04-30T16:44:39.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:39.000000Z\"\n        },\n        {\n            \"id\": 10,\n            \"name\": \"Tanya Malik\",\n            \"email\": \"tanya.malik@example.com\",\n            \"profile_image\": null,\n            \"gender\": \"female\",\n            \"age\": 27,\n            \"dob\": \"1996-12-30\",\n            \"is_admin\": 0,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\"\n        },\n        {\n            \"id\": 11,\n            \"name\": \"Saurabh Shukla\",\n            \"email\": \"saurabh.shukla_1@example.com\",\n            \"profile_image\": \"saurabh_1.jpg\",\n            \"gender\": \"male\",\n            \"age\": 30,\n            \"dob\": \"1993-11-24\",\n            \"is_admin\": 1,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-05-01T07:26:22.000000Z\",\n            \"updated_at\": \"2025-05-01T07:29:54.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Add Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"title\" : \"1st Post\",\r\n    \"content\" : \"Post is content api for the level taken.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Posts Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user_id\": 1,\r\n    \"title\" : \"1st Post\",\r\n    \"content\" : \"Post is content api for the level taken.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/posts",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"posts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 06:58:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Post created successfully.\",\n    \"data\": {\n        \"user_id\": 1,\n        \"title\": \"1st Post\",\n        \"content\": \"Post is content api for the level taken.\",\n        \"slug\": \"1st-post\",\n        \"updated_at\": \"2025-05-01T06:58:33.000000Z\",\n        \"created_at\": \"2025-05-01T06:58:33.000000Z\",\n        \"id\": 11\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"title\" : \"1st Post\",\r\n    \"content\" : \"1st Post is content api for the level taken.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Posts Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user_id\": 1,\r\n    \"title\" : \"1st Post\",\r\n    \"content\" : \"1st Post is content api for the level taken.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/posts/11",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"posts",
+										"11"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:14:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Post updated successfully.\",\n    \"data\": {\n        \"id\": 11,\n        \"user_id\": 1,\n        \"title\": \"1st Post\",\n        \"content\": \"1st Post is content api for the level taken.\",\n        \"image\": null,\n        \"status\": \"draft\",\n        \"created_at\": \"2025-05-01T06:58:33.000000Z\",\n        \"updated_at\": \"2025-05-01T07:14:33.000000Z\",\n        \"slug\": \"1st-post\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Show Post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Show Post Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/posts/11",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"posts",
+										"11"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:15:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Post fetched successfully.\",\n    \"data\": {\n        \"id\": 11,\n        \"user_id\": 1,\n        \"title\": \"1st Post\",\n        \"content\": \"1st Post is content api for the level taken.\",\n        \"image\": null,\n        \"status\": \"draft\",\n        \"created_at\": \"2025-05-01T06:58:33.000000Z\",\n        \"updated_at\": \"2025-05-01T07:14:33.000000Z\",\n        \"slug\": \"1st-post\",\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Saurabh Shukla\",\n            \"email\": \"saurabh.shukla@example.com\",\n            \"profile_image\": \"saurabh.jpg\",\n            \"gender\": \"male\",\n            \"age\": 30,\n            \"dob\": \"1993-11-24\",\n            \"is_admin\": 1,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-04-30T16:44:34.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:34.000000Z\"\n        },\n        \"comments\": []\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Post Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/posts/11",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"posts",
+										"11"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:17:50 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Post deleted successfully.\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Post Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/posts",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"posts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:16:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Posts fetched successfully.\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"title\": \"Top 5 Laravel Tips\",\n            \"content\": \"Here are some tips...\",\n            \"image\": \"laravel-tips.jpg\",\n            \"status\": \"published\",\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"slug\": null,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Saurabh Shukla\",\n                \"email\": \"saurabh.shukla@example.com\",\n                \"profile_image\": \"saurabh.jpg\",\n                \"gender\": \"male\",\n                \"age\": 30,\n                \"dob\": \"1993-11-24\",\n                \"is_admin\": 1,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:34.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:34.000000Z\"\n            },\n            \"comments\": [\n                {\n                    \"id\": 1,\n                    \"post_id\": 1,\n                    \"user_id\": 2,\n                    \"comment\": \"Great tips! Helped me a lot.\",\n                    \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"user\": {\n                        \"id\": 2,\n                        \"name\": \"Anjali Verma\",\n                        \"email\": \"anjali.verma@example.com\",\n                        \"profile_image\": \"anjali.jpg\",\n                        \"gender\": \"female\",\n                        \"age\": 28,\n                        \"dob\": \"1995-02-15\",\n                        \"is_admin\": 0,\n                        \"email_verified_at\": null,\n                        \"created_at\": \"2025-04-30T16:44:35.000000Z\",\n                        \"updated_at\": \"2025-04-30T16:44:35.000000Z\"\n                    }\n                },\n                {\n                    \"id\": 2,\n                    \"post_id\": 1,\n                    \"user_id\": 3,\n                    \"comment\": \"Thanks for sharing.\",\n                    \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"user\": {\n                        \"id\": 3,\n                        \"name\": \"Rahul Mehta\",\n                        \"email\": \"rahul.mehta@example.com\",\n                        \"profile_image\": null,\n                        \"gender\": \"male\",\n                        \"age\": 35,\n                        \"dob\": \"1988-08-10\",\n                        \"is_admin\": 0,\n                        \"email_verified_at\": null,\n                        \"created_at\": \"2025-04-30T16:44:35.000000Z\",\n                        \"updated_at\": \"2025-04-30T16:44:35.000000Z\"\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"user_id\": 2,\n            \"title\": \"New Fashion Trends 2025\",\n            \"content\": \"Explore trends...\",\n            \"image\": \"fashion.jpg\",\n            \"status\": \"published\",\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"slug\": null,\n            \"user\": {\n                \"id\": 2,\n                \"name\": \"Anjali Verma\",\n                \"email\": \"anjali.verma@example.com\",\n                \"profile_image\": \"anjali.jpg\",\n                \"gender\": \"female\",\n                \"age\": 28,\n                \"dob\": \"1995-02-15\",\n                \"is_admin\": 0,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:35.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:35.000000Z\"\n            },\n            \"comments\": [\n                {\n                    \"id\": 3,\n                    \"post_id\": 2,\n                    \"user_id\": 4,\n                    \"comment\": \"Loved the outfit ideas!\",\n                    \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"user\": {\n                        \"id\": 4,\n                        \"name\": \"Priya Singh\",\n                        \"email\": \"priya.singh@example.com\",\n                        \"profile_image\": \"priya.jpg\",\n                        \"gender\": \"female\",\n                        \"age\": 26,\n                        \"dob\": \"1997-07-01\",\n                        \"is_admin\": 0,\n                        \"email_verified_at\": null,\n                        \"created_at\": \"2025-04-30T16:44:36.000000Z\",\n                        \"updated_at\": \"2025-04-30T16:44:36.000000Z\"\n                    }\n                },\n                {\n                    \"id\": 4,\n                    \"post_id\": 2,\n                    \"user_id\": 5,\n                    \"comment\": \"Informative and trendy.\",\n                    \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"user\": {\n                        \"id\": 5,\n                        \"name\": \"Amit Jain\",\n                        \"email\": \"amit.jain@example.com\",\n                        \"profile_image\": null,\n                        \"gender\": \"male\",\n                        \"age\": 40,\n                        \"dob\": \"1983-01-22\",\n                        \"is_admin\": 0,\n                        \"email_verified_at\": null,\n                        \"created_at\": \"2025-04-30T16:44:37.000000Z\",\n                        \"updated_at\": \"2025-04-30T16:44:37.000000Z\"\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 3,\n            \"user_id\": 3,\n            \"title\": \"React vs Vue\",\n            \"content\": \"Comparison in 2025...\",\n            \"image\": null,\n            \"status\": \"draft\",\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"slug\": null,\n            \"user\": {\n                \"id\": 3,\n                \"name\": \"Rahul Mehta\",\n                \"email\": \"rahul.mehta@example.com\",\n                \"profile_image\": null,\n                \"gender\": \"male\",\n                \"age\": 35,\n                \"dob\": \"1988-08-10\",\n                \"is_admin\": 0,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:35.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:35.000000Z\"\n            },\n            \"comments\": [\n                {\n                    \"id\": 5,\n                    \"post_id\": 3,\n                    \"user_id\": 6,\n                    \"comment\": \"Still love React more!\",\n                    \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"user\": {\n                        \"id\": 6,\n                        \"name\": \"Meena Sharma\",\n                        \"email\": \"meena.sharma@example.com\",\n                        \"profile_image\": \"meena.png\",\n                        \"gender\": \"female\",\n                        \"age\": 31,\n                        \"dob\": \"1992-05-11\",\n                        \"is_admin\": 0,\n                        \"email_verified_at\": null,\n                        \"created_at\": \"2025-04-30T16:44:37.000000Z\",\n                        \"updated_at\": \"2025-04-30T16:44:37.000000Z\"\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 4,\n            \"user_id\": 4,\n            \"title\": \"Why Tailwind CSS\",\n            \"content\": \"Tailwind is amazing...\",\n            \"image\": \"tailwind.jpg\",\n            \"status\": \"published\",\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"slug\": null,\n            \"user\": {\n                \"id\": 4,\n                \"name\": \"Priya Singh\",\n                \"email\": \"priya.singh@example.com\",\n                \"profile_image\": \"priya.jpg\",\n                \"gender\": \"female\",\n                \"age\": 26,\n                \"dob\": \"1997-07-01\",\n                \"is_admin\": 0,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:36.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:36.000000Z\"\n            },\n            \"comments\": [\n                {\n                    \"id\": 6,\n                    \"post_id\": 4,\n                    \"user_id\": 7,\n                    \"comment\": \"Tailwind has made my life easier.\",\n                    \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"user\": {\n                        \"id\": 7,\n                        \"name\": \"Ravi Kapoor\",\n                        \"email\": \"ravi.kapoor@example.com\",\n                        \"profile_image\": null,\n                        \"gender\": \"male\",\n                        \"age\": 29,\n                        \"dob\": \"1994-03-08\",\n                        \"is_admin\": 0,\n                        \"email_verified_at\": null,\n                        \"created_at\": \"2025-04-30T16:44:38.000000Z\",\n                        \"updated_at\": \"2025-04-30T16:44:38.000000Z\"\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 5,\n            \"user_id\": 5,\n            \"title\": \"Start a YouTube Channel\",\n            \"content\": \"Get started with video...\",\n            \"image\": null,\n            \"status\": \"draft\",\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"slug\": null,\n            \"user\": {\n                \"id\": 5,\n                \"name\": \"Amit Jain\",\n                \"email\": \"amit.jain@example.com\",\n                \"profile_image\": null,\n                \"gender\": \"male\",\n                \"age\": 40,\n                \"dob\": \"1983-01-22\",\n                \"is_admin\": 0,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:37.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:37.000000Z\"\n            },\n            \"comments\": [\n                {\n                    \"id\": 7,\n                    \"post_id\": 5,\n                    \"user_id\": 8,\n                    \"comment\": \"Starting mine soon. Wish me luck!\",\n                    \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"user\": {\n                        \"id\": 8,\n                        \"name\": \"Sneha Rao\",\n                        \"email\": \"sneha.rao@example.com\",\n                        \"profile_image\": \"sneha.jpg\",\n                        \"gender\": \"female\",\n                        \"age\": 32,\n                        \"dob\": \"1991-09-20\",\n                        \"is_admin\": 0,\n                        \"email_verified_at\": null,\n                        \"created_at\": \"2025-04-30T16:44:38.000000Z\",\n                        \"updated_at\": \"2025-04-30T16:44:38.000000Z\"\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 6,\n            \"user_id\": 6,\n            \"title\": \"Places to Visit in Goa\",\n            \"content\": \"Beaches, forts...\",\n            \"image\": \"goa.jpg\",\n            \"status\": \"published\",\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"slug\": null,\n            \"user\": {\n                \"id\": 6,\n                \"name\": \"Meena Sharma\",\n                \"email\": \"meena.sharma@example.com\",\n                \"profile_image\": \"meena.png\",\n                \"gender\": \"female\",\n                \"age\": 31,\n                \"dob\": \"1992-05-11\",\n                \"is_admin\": 0,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:37.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:37.000000Z\"\n            },\n            \"comments\": [\n                {\n                    \"id\": 8,\n                    \"post_id\": 6,\n                    \"user_id\": 9,\n                    \"comment\": \"Goa is magical!\",\n                    \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"user\": {\n                        \"id\": 9,\n                        \"name\": \"Vikas Nair\",\n                        \"email\": \"vikas.nair@example.com\",\n                        \"profile_image\": \"vikas.png\",\n                        \"gender\": \"male\",\n                        \"age\": 33,\n                        \"dob\": \"1990-06-17\",\n                        \"is_admin\": 0,\n                        \"email_verified_at\": null,\n                        \"created_at\": \"2025-04-30T16:44:39.000000Z\",\n                        \"updated_at\": \"2025-04-30T16:44:39.000000Z\"\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 7,\n            \"user_id\": 7,\n            \"title\": \"Healthy Diet Plan\",\n            \"content\": \"Nutrition tips...\",\n            \"image\": \"diet.jpg\",\n            \"status\": \"published\",\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"slug\": null,\n            \"user\": {\n                \"id\": 7,\n                \"name\": \"Ravi Kapoor\",\n                \"email\": \"ravi.kapoor@example.com\",\n                \"profile_image\": null,\n                \"gender\": \"male\",\n                \"age\": 29,\n                \"dob\": \"1994-03-08\",\n                \"is_admin\": 0,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:38.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:38.000000Z\"\n            },\n            \"comments\": [\n                {\n                    \"id\": 9,\n                    \"post_id\": 7,\n                    \"user_id\": 10,\n                    \"comment\": \"Exactly what I needed. Thanks!\",\n                    \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"user\": {\n                        \"id\": 10,\n                        \"name\": \"Tanya Malik\",\n                        \"email\": \"tanya.malik@example.com\",\n                        \"profile_image\": null,\n                        \"gender\": \"female\",\n                        \"age\": 27,\n                        \"dob\": \"1996-12-30\",\n                        \"is_admin\": 0,\n                        \"email_verified_at\": null,\n                        \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n                        \"updated_at\": \"2025-04-30T16:44:40.000000Z\"\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 8,\n            \"user_id\": 8,\n            \"title\": \"Best Laptops for Devs\",\n            \"content\": \"Performance review...\",\n            \"image\": null,\n            \"status\": \"draft\",\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"slug\": null,\n            \"user\": {\n                \"id\": 8,\n                \"name\": \"Sneha Rao\",\n                \"email\": \"sneha.rao@example.com\",\n                \"profile_image\": \"sneha.jpg\",\n                \"gender\": \"female\",\n                \"age\": 32,\n                \"dob\": \"1991-09-20\",\n                \"is_admin\": 0,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:38.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:38.000000Z\"\n            },\n            \"comments\": []\n        },\n        {\n            \"id\": 9,\n            \"user_id\": 9,\n            \"title\": \"Freelance as Designer\",\n            \"content\": \"My journey...\",\n            \"image\": \"freelance.jpg\",\n            \"status\": \"published\",\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"slug\": null,\n            \"user\": {\n                \"id\": 9,\n                \"name\": \"Vikas Nair\",\n                \"email\": \"vikas.nair@example.com\",\n                \"profile_image\": \"vikas.png\",\n                \"gender\": \"male\",\n                \"age\": 33,\n                \"dob\": \"1990-06-17\",\n                \"is_admin\": 0,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:39.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:39.000000Z\"\n            },\n            \"comments\": []\n        },\n        {\n            \"id\": 10,\n            \"user_id\": 10,\n            \"title\": \"Benefits of Meditation\",\n            \"content\": \"Mental health benefits...\",\n            \"image\": \"meditation.jpg\",\n            \"status\": \"published\",\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"slug\": null,\n            \"user\": {\n                \"id\": 10,\n                \"name\": \"Tanya Malik\",\n                \"email\": \"tanya.malik@example.com\",\n                \"profile_image\": null,\n                \"gender\": \"female\",\n                \"age\": 27,\n                \"dob\": \"1996-12-30\",\n                \"is_admin\": 0,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:40.000000Z\"\n            },\n            \"comments\": [\n                {\n                    \"id\": 10,\n                    \"post_id\": 10,\n                    \"user_id\": 1,\n                    \"comment\": \"Meditation changed my mornings!\",\n                    \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n                    \"user\": {\n                        \"id\": 1,\n                        \"name\": \"Saurabh Shukla\",\n                        \"email\": \"saurabh.shukla@example.com\",\n                        \"profile_image\": \"saurabh.jpg\",\n                        \"gender\": \"male\",\n                        \"age\": 30,\n                        \"dob\": \"1993-11-24\",\n                        \"is_admin\": 1,\n                        \"email_verified_at\": null,\n                        \"created_at\": \"2025-04-30T16:44:34.000000Z\",\n                        \"updated_at\": \"2025-04-30T16:44:34.000000Z\"\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 11,\n            \"user_id\": 1,\n            \"title\": \"1st Post\",\n            \"content\": \"1st Post is content api for the level taken.\",\n            \"image\": null,\n            \"status\": \"draft\",\n            \"created_at\": \"2025-05-01T06:58:33.000000Z\",\n            \"updated_at\": \"2025-05-01T07:14:33.000000Z\",\n            \"slug\": \"1st-post\",\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Saurabh Shukla\",\n                \"email\": \"saurabh.shukla@example.com\",\n                \"profile_image\": \"saurabh.jpg\",\n                \"gender\": \"male\",\n                \"age\": 30,\n                \"dob\": \"1993-11-24\",\n                \"is_admin\": 1,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:34.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:34.000000Z\"\n            },\n            \"comments\": []\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "SubCategory",
+			"item": [
+				{
+					"name": "Add SubCategory",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Lamps\",\r\n    \"category_id\":3,\r\n    \"description\":\"dining sets\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/subcategories",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"subcategories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add SubCategory Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Sofas\",\r\n    \"category_id\":1,\r\n    \"description\":\"Sofas\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/subcategories",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"subcategories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 05:10:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Subcategory created successfully.\",\n    \"data\": {\n        \"name\": \"Sofas\",\n        \"description\": \"Sofas\",\n        \"category_id\": 1,\n        \"updated_at\": \"2025-05-01T05:10:03.000000Z\",\n        \"created_at\": \"2025-05-01T05:10:03.000000Z\",\n        \"id\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update SubCategory",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Lighting_1\",\r\n    \"category_id\":3,\r\n    \"description\":\"Lighting\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/subcategories/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"subcategories",
+								"8"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update SubCategory Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Lighting_1\",\r\n    \"category_id\":3,\r\n    \"description\":\"Lighting\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/subcategories/8",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"subcategories",
+										"8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 05:13:56 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Subcategory updated successfully.\",\n    \"data\": {\n        \"id\": 8,\n        \"category_id\": 3,\n        \"name\": \"Lighting_1\",\n        \"description\": \"Lighting\",\n        \"created_at\": \"2025-05-01T05:12:29.000000Z\",\n        \"updated_at\": \"2025-05-01T05:13:56.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Show SubCategory",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/subcategories/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"subcategories",
+								"8"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Show SubCategory Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/subcategories/8",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"subcategories",
+										"8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 05:14:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Subcategory fetched successfully.\",\n    \"data\": {\n        \"id\": 8,\n        \"category_id\": 3,\n        \"name\": \"Lighting_1\",\n        \"description\": \"Lighting\",\n        \"created_at\": \"2025-05-01T05:12:29.000000Z\",\n        \"updated_at\": \"2025-05-01T05:13:56.000000Z\",\n        \"category\": {\n            \"id\": 3,\n            \"name\": \"Kitchen & Dining\",\n            \"description\": \"Kitchen & Dining\",\n            \"created_at\": \"2025-05-01T04:53:35.000000Z\",\n            \"updated_at\": \"2025-05-01T04:53:35.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete SubCategory",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/subcategories/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"subcategories",
+								"8"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Category Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/subcategories/8",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"subcategories",
+										"8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 05:17:20 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Subcategory deleted successfully.\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Get SubCategory",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/subcategories",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"subcategories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Category Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/subcategories",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"subcategories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 05:15:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Subcategories fetched successfully.\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"category_id\": 1,\n            \"name\": \"Sofas\",\n            \"description\": \"Sofas\",\n            \"created_at\": \"2025-05-01T05:10:03.000000Z\",\n            \"updated_at\": \"2025-05-01T05:10:03.000000Z\",\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"Furniture\",\n                \"description\": \"Furniture\",\n                \"created_at\": \"2025-05-01T04:50:40.000000Z\",\n                \"updated_at\": \"2025-05-01T04:50:40.000000Z\"\n            }\n        },\n        {\n            \"id\": 2,\n            \"category_id\": 1,\n            \"name\": \"Coffee tables\",\n            \"description\": \"coffee tables\",\n            \"created_at\": \"2025-05-01T05:10:40.000000Z\",\n            \"updated_at\": \"2025-05-01T05:10:40.000000Z\",\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"Furniture\",\n                \"description\": \"Furniture\",\n                \"created_at\": \"2025-05-01T04:50:40.000000Z\",\n                \"updated_at\": \"2025-05-01T04:50:40.000000Z\"\n            }\n        },\n        {\n            \"id\": 3,\n            \"category_id\": 1,\n            \"name\": \"TV units\",\n            \"description\": \"TV units\",\n            \"created_at\": \"2025-05-01T05:10:57.000000Z\",\n            \"updated_at\": \"2025-05-01T05:10:57.000000Z\",\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"Furniture\",\n                \"description\": \"Furniture\",\n                \"created_at\": \"2025-05-01T04:50:40.000000Z\",\n                \"updated_at\": \"2025-05-01T04:50:40.000000Z\"\n            }\n        },\n        {\n            \"id\": 4,\n            \"category_id\": 2,\n            \"name\": \"Wall art\",\n            \"description\": \"Wall art\",\n            \"created_at\": \"2025-05-01T05:11:22.000000Z\",\n            \"updated_at\": \"2025-05-01T05:11:22.000000Z\",\n            \"category\": {\n                \"id\": 2,\n                \"name\": \"Home Decor\",\n                \"description\": \"Home Decor\",\n                \"created_at\": \"2025-05-01T04:53:14.000000Z\",\n                \"updated_at\": \"2025-05-01T04:53:14.000000Z\"\n            }\n        },\n        {\n            \"id\": 5,\n            \"category_id\": 2,\n            \"name\": \"clocks\",\n            \"description\": \"clocks\",\n            \"created_at\": \"2025-05-01T05:11:39.000000Z\",\n            \"updated_at\": \"2025-05-01T05:11:39.000000Z\",\n            \"category\": {\n                \"id\": 2,\n                \"name\": \"Home Decor\",\n                \"description\": \"Home Decor\",\n                \"created_at\": \"2025-05-01T04:53:14.000000Z\",\n                \"updated_at\": \"2025-05-01T04:53:14.000000Z\"\n            }\n        },\n        {\n            \"id\": 6,\n            \"category_id\": 3,\n            \"name\": \"Pots\",\n            \"description\": \"Pots\",\n            \"created_at\": \"2025-05-01T05:11:52.000000Z\",\n            \"updated_at\": \"2025-05-01T05:11:52.000000Z\",\n            \"category\": {\n                \"id\": 3,\n                \"name\": \"Kitchen & Dining\",\n                \"description\": \"Kitchen & Dining\",\n                \"created_at\": \"2025-05-01T04:53:35.000000Z\",\n                \"updated_at\": \"2025-05-01T04:53:35.000000Z\"\n            }\n        },\n        {\n            \"id\": 7,\n            \"category_id\": 3,\n            \"name\": \"Dining sets\",\n            \"description\": \"dining sets\",\n            \"created_at\": \"2025-05-01T05:12:14.000000Z\",\n            \"updated_at\": \"2025-05-01T05:12:14.000000Z\",\n            \"category\": {\n                \"id\": 3,\n                \"name\": \"Kitchen & Dining\",\n                \"description\": \"Kitchen & Dining\",\n                \"created_at\": \"2025-05-01T04:53:35.000000Z\",\n                \"updated_at\": \"2025-05-01T04:53:35.000000Z\"\n            }\n        },\n        {\n            \"id\": 8,\n            \"category_id\": 3,\n            \"name\": \"Lighting_1\",\n            \"description\": \"Lighting\",\n            \"created_at\": \"2025-05-01T05:12:29.000000Z\",\n            \"updated_at\": \"2025-05-01T05:13:56.000000Z\",\n            \"category\": {\n                \"id\": 3,\n                \"name\": \"Kitchen & Dining\",\n                \"description\": \"Kitchen & Dining\",\n                \"created_at\": \"2025-05-01T04:53:35.000000Z\",\n                \"updated_at\": \"2025-05-01T04:53:35.000000Z\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Add Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"9 Seater Sofa\",\r\n    \"price\":89600.00,\r\n    \"category_id\":1,\r\n    \"subcategory_id\":1,\r\n    \"description\":\"Sofa is good one things\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/products/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Product Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"9 Seater Sofa\",\r\n    \"price\":89600.00,\r\n    \"category_id\":1,\r\n    \"subcategory_id\":1,\r\n    \"description\":\"Sofa is good one things\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/products/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"products",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 05:29:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{ \n    \"success\": true,\n    \"message\": \"Product created successfully.\",\n    \"data\": {\n        \"name\": \"9 Seater Sofa\",\n        \"description\": \"Sofa is good one things\",\n        \"price\": 89600,\n        \"category_id\": 1,\n        \"subcategory_id\": 1,\n        \"slug\": \"9-seater-sofa\",\n        \"updated_at\": \"2025-05-01T05:29:45.000000Z\",\n        \"created_at\": \"2025-05-01T05:29:45.000000Z\",\n        \"id\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"9-1 Seater Sofa\",\r\n    \"price\":89600.00,\r\n    \"category_id\":1,\r\n    \"subcategory_id\":1,\r\n    \"description\":\"Sofa is good one things\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/products/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Product Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"9-1 Seater Sofa\",\r\n    \"price\":89600.00,\r\n    \"category_id\":1,\r\n    \"subcategory_id\":1,\r\n    \"description\":\"Sofa is good one things\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/products/3",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"products",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 06:22:07 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Product updated successfully.\",\n    \"data\": {\n        \"id\": 3,\n        \"category_id\": 1,\n        \"subcategory_id\": 1,\n        \"name\": \"9-1 Seater Sofa\",\n        \"slug\": \"9-1-seater-sofa\",\n        \"description\": \"Sofa is good one things\",\n        \"price\": 89600,\n        \"image\": null,\n        \"status\": \"active\",\n        \"created_at\": \"2025-05-01T05:29:45.000000Z\",\n        \"updated_at\": \"2025-05-01T06:22:07.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Show Product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/products/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Show Product Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/products/3",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"products",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 06:23:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Product fetched successfully.\",\n    \"data\": {\n        \"id\": 3,\n        \"category_id\": 1,\n        \"subcategory_id\": 1,\n        \"name\": \"9-1 Seater Sofa\",\n        \"slug\": \"9-1-seater-sofa\",\n        \"description\": \"Sofa is good one things\",\n        \"price\": \"89600.00\",\n        \"image\": null,\n        \"status\": \"active\",\n        \"created_at\": \"2025-05-01T05:29:45.000000Z\",\n        \"updated_at\": \"2025-05-01T06:22:07.000000Z\",\n        \"category\": {\n            \"id\": 1,\n            \"name\": \"Furniture\",\n            \"description\": \"Furniture\",\n            \"created_at\": \"2025-05-01T04:50:40.000000Z\",\n            \"updated_at\": \"2025-05-01T04:50:40.000000Z\"\n        },\n        \"subcategory\": {\n            \"id\": 1,\n            \"category_id\": 1,\n            \"name\": \"Sofas\",\n            \"description\": \"Sofas\",\n            \"created_at\": \"2025-05-01T05:10:03.000000Z\",\n            \"updated_at\": \"2025-05-01T05:10:03.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Products",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/products/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Products Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/products/3",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"products",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 06:25:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Product deleted successfully.\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Get SubCategory",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/products",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get products response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/products",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 06:23:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Products fetched successfully.\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"category_id\": 1,\n            \"subcategory_id\": 1,\n            \"name\": \"5 Seater Sofa\",\n            \"slug\": \"5-seater-sofa\",\n            \"description\": \"Sofa is good one things\",\n            \"price\": \"89600.00\",\n            \"image\": null,\n            \"status\": \"active\",\n            \"created_at\": \"2025-05-01T05:28:17.000000Z\",\n            \"updated_at\": \"2025-05-01T05:28:17.000000Z\",\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"Furniture\",\n                \"description\": \"Furniture\",\n                \"created_at\": \"2025-05-01T04:50:40.000000Z\",\n                \"updated_at\": \"2025-05-01T04:50:40.000000Z\"\n            },\n            \"subcategory\": {\n                \"id\": 1,\n                \"category_id\": 1,\n                \"name\": \"Sofas\",\n                \"description\": \"Sofas\",\n                \"created_at\": \"2025-05-01T05:10:03.000000Z\",\n                \"updated_at\": \"2025-05-01T05:10:03.000000Z\"\n            }\n        },\n        {\n            \"id\": 2,\n            \"category_id\": 1,\n            \"subcategory_id\": 1,\n            \"name\": \"7 Seater Sofa\",\n            \"slug\": \"7-seater-sofa\",\n            \"description\": \"Sofa is good one things\",\n            \"price\": \"89600.00\",\n            \"image\": null,\n            \"status\": \"active\",\n            \"created_at\": \"2025-05-01T05:28:29.000000Z\",\n            \"updated_at\": \"2025-05-01T05:28:29.000000Z\",\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"Furniture\",\n                \"description\": \"Furniture\",\n                \"created_at\": \"2025-05-01T04:50:40.000000Z\",\n                \"updated_at\": \"2025-05-01T04:50:40.000000Z\"\n            },\n            \"subcategory\": {\n                \"id\": 1,\n                \"category_id\": 1,\n                \"name\": \"Sofas\",\n                \"description\": \"Sofas\",\n                \"created_at\": \"2025-05-01T05:10:03.000000Z\",\n                \"updated_at\": \"2025-05-01T05:10:03.000000Z\"\n            }\n        },\n        {\n            \"id\": 3,\n            \"category_id\": 1,\n            \"subcategory_id\": 1,\n            \"name\": \"9-1 Seater Sofa\",\n            \"slug\": \"9-1-seater-sofa\",\n            \"description\": \"Sofa is good one things\",\n            \"price\": \"89600.00\",\n            \"image\": null,\n            \"status\": \"active\",\n            \"created_at\": \"2025-05-01T05:29:45.000000Z\",\n            \"updated_at\": \"2025-05-01T06:22:07.000000Z\",\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"Furniture\",\n                \"description\": \"Furniture\",\n                \"created_at\": \"2025-05-01T04:50:40.000000Z\",\n                \"updated_at\": \"2025-05-01T04:50:40.000000Z\"\n            },\n            \"subcategory\": {\n                \"id\": 1,\n                \"category_id\": 1,\n                \"name\": \"Sofas\",\n                \"description\": \"Sofas\",\n                \"created_at\": \"2025-05-01T05:10:03.000000Z\",\n                \"updated_at\": \"2025-05-01T05:10:03.000000Z\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "Get comments to single post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/1/comments",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get comments to single post response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/posts/1/comments",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"posts",
+										"1",
+										"comments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:37:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"comments\": [\n        {\n            \"id\": 1,\n            \"post_id\": 1,\n            \"user_id\": 2,\n            \"comment\": \"Great tips! Helped me a lot.\",\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"user\": {\n                \"id\": 2,\n                \"name\": \"Anjali Verma\",\n                \"email\": \"anjali.verma@example.com\",\n                \"profile_image\": \"anjali.jpg\",\n                \"gender\": \"female\",\n                \"age\": 28,\n                \"dob\": \"1995-02-15\",\n                \"is_admin\": 0,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:35.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:35.000000Z\"\n            }\n        },\n        {\n            \"id\": 2,\n            \"post_id\": 1,\n            \"user_id\": 3,\n            \"comment\": \"Thanks for sharing.\",\n            \"created_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:40.000000Z\",\n            \"user\": {\n                \"id\": 3,\n                \"name\": \"Rahul Mehta\",\n                \"email\": \"rahul.mehta@example.com\",\n                \"profile_image\": null,\n                \"gender\": \"male\",\n                \"age\": 35,\n                \"dob\": \"1988-08-10\",\n                \"is_admin\": 0,\n                \"email_verified_at\": null,\n                \"created_at\": \"2025-04-30T16:44:35.000000Z\",\n                \"updated_at\": \"2025-04-30T16:44:35.000000Z\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add comment for single post via user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\":1,\r\n    \"comment\":\"This is post is too good for me bfhbhjbrj\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/1/comments",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add comment for single post via user Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user_id\":1,\r\n    \"comment\":\"This is post is too good for me.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/posts/1/comments",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"posts",
+										"1",
+										"comments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:42:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Comment added successfully.\",\n    \"data\": {\n        \"post_id\": \"1\",\n        \"user_id\": 1,\n        \"comment\": \"This is post is too good for me.\",\n        \"updated_at\": \"2025-05-01T07:42:30.000000Z\",\n        \"created_at\": \"2025-05-01T07:42:30.000000Z\",\n        \"id\": 11\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Show comment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/comments/12",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comments",
+								"12"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Show comment Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/comments/12",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"comments",
+										"12"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:51:11 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Comment fetched successfully.\",\n    \"data\": {\n        \"id\": 12,\n        \"post_id\": 1,\n        \"user_id\": 1,\n        \"comment\": \"This is post is too good for me bfhbhjbrj\",\n        \"created_at\": \"2025-05-01T07:50:56.000000Z\",\n        \"updated_at\": \"2025-05-01T07:50:56.000000Z\",\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Saurabh Shukla\",\n            \"email\": \"saurabh.shukla@example.com\",\n            \"profile_image\": \"saurabh.jpg\",\n            \"gender\": \"male\",\n            \"age\": 30,\n            \"dob\": \"1993-11-24\",\n            \"is_admin\": 1,\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-04-30T16:44:34.000000Z\",\n            \"updated_at\": \"2025-04-30T16:44:34.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete comment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/comments/12",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comments",
+								"12"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete comment Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/comments/12",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"comments",
+										"12"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:53:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Comment deleted successfully.\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Update comment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\":1,\r\n    \"comment\":\"This is post is too good for me h\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/comments/12",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comments",
+								"12"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update comment Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user_id\":1,\r\n    \"comment\":\"This is post is too good for me h\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/comments/12",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"comments",
+										"12"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 May 2025 07:52:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Comment updated successfully.\",\n    \"data\": {\n        \"id\": 12,\n        \"post_id\": 1,\n        \"user_id\": 1,\n        \"comment\": \"This is post is too good for me h\",\n        \"created_at\": \"2025-05-01T07:50:56.000000Z\",\n        \"updated_at\": \"2025-05-01T07:52:43.000000Z\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
