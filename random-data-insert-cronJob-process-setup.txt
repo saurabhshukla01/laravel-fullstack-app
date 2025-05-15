@@ -1,0 +1,216 @@
+To implement your requirement for **Laravel 12+** where:
+
+* A **user is created every 5 minutes** (with random data),
+* A **post is created every 3 minutes** (with random data and linked to a user),
+* A **comment is created every 1 minute** (with random user and post),
+
+we can follow this approach using **Laravel Scheduler and Artisan Commands**, and optionally use **Model Factories** for random data generation.
+
+---
+
+## ✅ Step 1: Create Artisan Commands
+
+Run these commands:
+
+```bash
+php artisan make:command CreateRandomUser
+php artisan make:command CreateRandomPost
+php artisan make:command CreateRandomComment
+```
+
+---
+
+## ✅ Step 2: Set Up Model Factories
+
+### `database/factories/UserFactory.php`
+
+```php
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+
+$factory->define(App\Models\User::class, function () {
+    return [
+        'name' => fake()->name,
+        'email' => fake()->unique()->safeEmail,
+        'profile_image' => null,
+        'gender' => fake()->randomElement(['male', 'female', 'other']),
+        'age' => rand(18, 60),
+        'dob' => now()->subYears(rand(18, 60))->format('Y-m-d'),
+        'is_admin' => fake()->boolean(20),
+        'password' => Hash::make('123456'),
+    ];
+});
+```
+
+### `database/factories/PostFactory.php`
+
+```php
+$factory->define(App\Models\Post::class, function () {
+    return [
+        'user_id' => \App\Models\User::inRandomOrder()->first()->id ?? \App\Models\User::factory(),
+        'title' => fake()->sentence(6),
+        'content' => fake()->paragraph(5),
+        'image' => null,
+        'status' => 'active',
+        'slug' => Str::slug(fake()->sentence(3)),
+    ];
+});
+```
+
+### `database/factories/CommentFactory.php`
+
+```php
+$factory->define(App\Models\Comment::class, function () {
+    return [
+        'post_id' => \App\Models\Post::inRandomOrder()->first()->id,
+        'user_id' => \App\Models\User::inRandomOrder()->first()->id,
+        'comment' => fake()->sentence(10),
+    ];
+});
+```
+
+---
+
+## ✅ Step 3: Command Classes
+
+### 🧑‍💻 `CreateRandomUser.php`
+
+```php
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+use App\Models\User;
+
+class CreateRandomUser extends Command
+{
+    protected $signature = 'user:create-random';
+    protected $description = 'Create a random user every 5 mins';
+
+    public function handle()
+    {
+        $email = fake()->unique()->safeEmail;
+
+        if (!User::where('email', $email)->exists()) {
+            $user = User::factory()->create(['email' => $email]);
+            $this->info("User created: {$user->email}");
+        } else {
+            $this->warn("User with email already exists.");
+        }
+    }
+}
+```
+
+### 📝 `CreateRandomPost.php`
+
+```php
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+use App\Models\Post;
+use App\Models\User;
+
+class CreateRandomPost extends Command
+{
+    protected $signature = 'post:create-random';
+    protected $description = 'Create a random post every 3 mins';
+
+    public function handle()
+    {
+        $user = User::inRandomOrder()->first();
+        if ($user) {
+            $post = Post::factory()->create(['user_id' => $user->id]);
+            $this->info("Post created: {$post->title}");
+        } else {
+            $this->warn("No user found to assign post.");
+        }
+    }
+}
+```
+
+### 💬 `CreateRandomComment.php`
+
+```php
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\User;
+
+class CreateRandomComment extends Command
+{
+    protected $signature = 'comment:create-random';
+    protected $description = 'Create a comment every 1 min';
+
+    public function handle()
+    {
+        $user = User::inRandomOrder()->first();
+        $post = Post::inRandomOrder()->first();
+
+        if ($user && $post) {
+            Comment::factory()->create([
+                'user_id' => $user->id,
+                'post_id' => $post->id,
+            ]);
+            $this->info("Comment added to Post ID: {$post->id} by User ID: {$user->id}");
+        } else {
+            $this->warn("Missing post or user.");
+        }
+    }
+}
+```
+
+---
+
+## ✅ Step 4: Register Commands in `routes/console.php`
+
+In **Laravel 12**, scheduling is done in `routes/console.php`:
+
+```php
+use Illuminate\Console\Scheduling\Schedule;
+
+app()->booted(function () {
+    $schedule = app(Schedule::class);
+
+    $schedule->command('user:create-random')->everyFiveMinutes();
+    $schedule->command('post:create-random')->everyThreeMinutes();
+    $schedule->command('comment:create-random')->everyMinute();
+});
+```
+
+---
+
+## ✅ Step 5: Running Locally (Development Testing)
+
+Since `crontab` doesn’t work in Windows easily, you can simulate cron by running:
+
+```bash
+while ($true) { php artisan schedule:run; Start-Sleep -Seconds 60 }
+```
+
+---
+
+## ✅ Logs & Confirmation
+
+* Check output using `storage/logs/laravel.log`
+* You can manually test each command too:
+
+  ```bash
+  php artisan user:create-random
+  php artisan post:create-random
+  php artisan comment:create-random
+  ```
+
+---
+
+## ✅ Optional: Use Seeder to Populate Initial Data
+
+If needed:
+
+```bash
+php artisan db:seed
+```
+
+---
+
+Let me know if you'd like to log each event in a separate file/folder (e.g., `logs/posts/yyyy-mm-dd/`) or send a notification/email after each creation.

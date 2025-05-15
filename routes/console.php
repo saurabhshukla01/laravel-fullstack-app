@@ -24,18 +24,20 @@ Artisan::command('schedule:run-custom', function () {
 app()->booted(function () {
     $schedule = app(Schedule::class);
 
-    // Run every minute  ( runs your custom command every minute )
-    $schedule->command('log:create')->everyMinute();
+    // // Run every minute  ( runs your custom command every minute )
+    // $schedule->command('log:create')->everyMinute();
+    // // Run every 5 minutes
+    // $schedule->command('task:five-min')->everyFiveMinutes();
+    // // Run every 2 minutes
+    // $schedule->command('task:two-min')->everyTwoMinutes();
+    // // Run every hour
+    // $schedule->command('task:hourly')->hourly();
+    // // Run daily at 2 AM
+    // $schedule->command('task:daily')->dailyAt('02:00');
 
-    // Run every 5 minutes
-    $schedule->command('task:five-min')->everyFiveMinutes();
+    // Start random data cronJob in User create every 5 min , post create every 3 min & comment added in every min. 
+    $schedule->command('user:create-random')->everyFiveMinutes();
+    $schedule->command('post:create-random')->everyThreeMinutes();
+    $schedule->command('comment:create-random')->everyMinute();
 
-    // Run every 2 minutes
-    $schedule->command('task:two-min')->everyTwoMinutes();
-
-    // Run every hour
-    $schedule->command('task:hourly')->hourly();
-
-    // Run daily at 2 AM
-    $schedule->command('task:daily')->dailyAt('02:00');
 });
