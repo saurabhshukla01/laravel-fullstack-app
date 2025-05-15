@@ -1,0 +1,243 @@
+In **Laravel 12+**, the scheduling system has changed compared to previous versions. The `app/Console/Kernel.php` file no longer exists by default. Instead, command scheduling is now handled in the **`routes/console.php`** file.
+
+Here’s how you can set up a scheduler in Laravel 12+ to **create a log file every minute**, **organized by date**:
+
+---
+
+### ✅ Step 1: Create a Custom Command
+
+Run this artisan command to create your command:
+
+```bash
+php artisan make:command CreateLogFile
+```
+
+This will generate a file at:
+
+```
+app/Console/Commands/CreateLogFile.php
+```
+
+Edit it with the following code:
+
+```php
+<?php
+
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
+
+class CreateLogFile extends Command
+{
+    protected $signature = 'log:create';
+    protected $description = 'Create a log file every minute in a date-based folder';
+
+    public function handle(): void
+    {
+        $date = now()->format('Y-m-d'); // Folder: logs/2025-05-15/
+        $time = now()->format('H-i-s'); // Filename: log_12-01-33.txt
+        $path = "logs/{$date}/log_{$time}.txt";
+
+        $content = "Log created at: " . now()->toDateTimeString();
+
+        Storage::disk('local')->put($path, $content);
+
+        $this->info("Log file created at: storage/app/{$path}");
+    }
+}
+```
+
+---
+
+### ✅ Step 2: Schedule the Command
+
+Open the `routes/console.php` file and **add the schedule inside the `Artisan::command()` macro**:
+
+```php
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Console\Scheduling\Schedule;
+
+Artisan::command('schedule:run-custom', function () {
+    $this->comment('Running scheduled tasks...');
+})->purpose('Run custom scheduled tasks');
+
+app()->booted(function () {
+    $schedule = app(Schedule::class);
+
+    // This runs your custom command every minute
+    $schedule->command('log:create')->everyMinute();
+});
+```
+
+> 🔁 This ensures your `log:create` command will run every minute when `php artisan schedule:run` is executed.
+
+---
+
+### ✅ Step 3: Manually Trigger in Local (Windows)
+
+Windows doesn't support native `cron`, but you can manually trigger the scheduler every minute:
+
+#### Option 1: Run it manually in a loop
+
+Use this in your terminal (PowerShell or CMD):
+
+```bash
+while ($true) { php artisan schedule:run; Start-Sleep -Seconds 60 }
+```
+
+Or in CMD:
+
+```bash
+:loop
+php artisan schedule:run
+timeout /t 60
+goto loop
+```
+
+#### Option 2: Use Windows Task Scheduler
+
+Schedule a task to run every minute with this command:
+
+```bash
+php artisan schedule:run
+```
+
+(Refer to earlier reply for full setup using Task Scheduler)
+
+---
+
+### ✅ Step 4: Check Your Log Files
+
+The log files will be created here:
+
+```
+storage/app/logs/YYYY-MM-DD/log_HH-MM-SS.txt
+```
+
+You can explore the folder using a file explorer or terminal:
+
+```bash
+cd storage/app/logs
+```
+
+---
+
+### Summary
+
+✅ **Laravel 12+ Scheduler Setup**:
+
+| Step | Description                                                                           |
+| ---- | ------------------------------------------------------------------------------------- |
+| ✅ 1  | Create a command with `php artisan make:command CreateLogFile`                        |
+| ✅ 2  | Schedule it inside `routes/console.php` using `app()->booted()`                       |
+| ✅ 3  | Manually run the scheduler (`php artisan schedule:run`) or use Windows Task Scheduler |
+| ✅ 4  | Logs are written to `storage/app/logs/{date}/log_{time}.txt`                          |
+
+Let me know if you want help auto-uploading or viewing logs in a dashboard.
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
+
+If we want to sun multiple scheduler so code is below :
+
+In **Laravel 12+**, you can easily run multiple scheduled commands at different times using the `app()->booted()` block in the `routes/console.php` file. Each command is scheduled using the `$schedule->command()->everyX()` syntax.
+
+---
+
+### ✅ Example: Multiple Schedulers in Laravel 12+
+
+Open your `routes/console.php` and set it up like this:
+
+```php
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Console\Scheduling\Schedule;
+
+app()->booted(function () {
+    $schedule = app(Schedule::class);
+
+    // Run every minute
+    $schedule->command('log:create')->everyMinute();
+
+    // Run every 5 minutes
+    $schedule->command('task:five-min')->everyFiveMinutes();
+
+    // Run every hour
+    $schedule->command('task:hourly')->hourly();
+
+    // Run daily at 2 AM
+    $schedule->command('task:daily')->dailyAt('02:00');
+});
+```
+
+---
+
+### ✅ Step-by-Step
+
+1. **Create your additional command classes**:
+
+```bash
+php artisan make:command FiveMinTask
+php artisan make:command HourlyTask
+php artisan make:command DailyTask
+```
+
+2. **Implement each command**:
+
+For example, `app/Console/Commands/FiveMinTask.php`:
+
+```php
+<?php
+
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+
+class FiveMinTask extends Command
+{
+    protected $signature = 'task:five-min';
+    protected $description = 'Runs every 5 minutes';
+
+    public function handle(): void
+    {
+        \Log::info('FiveMinTask ran at ' . now());
+    }
+}
+```
+
+Repeat similar structure for the others.
+
+3. **View logs** in `storage/logs/laravel.log` to confirm execution.
+
+---
+
+### ✅ Manual Testing Locally
+
+Run this every minute to simulate your scheduler:
+
+```bash
+php artisan schedule:run
+```
+
+You can also loop it for continuous testing (PowerShell):
+
+```bash
+while ($true) { php artisan schedule:run; Start-Sleep -Seconds 60 }
+```
+
+---
+
+### ✅ Summary of Schedule Options
+
+| Schedule Method          | Runs At                                |
+| ------------------------ | -------------------------------------- |
+| `everyMinute()`          | Every minute                           |
+| `everyFiveMinutes()`     | Every 5 minutes                        |
+| `hourly()`               | Every hour                             |
+| `dailyAt('HH:MM')`       | Daily at specific time (e.g. 02:00 AM) |
+| `weeklyOn(1, '8:00')`    | Every Monday at 8 AM                   |
+| `monthlyOn(15, '10:00')` | 15th of each month at 10 AM            |
+
+---
+
+Let me know if you want to run commands conditionally or with output redirection/logging.
