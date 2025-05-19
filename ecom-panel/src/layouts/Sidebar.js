@@ -27,6 +27,82 @@ const Sidebar = () => {
                                 <span class="nav-link-text">Overview</span>
                             </Link>
                         </li>
+
+                        {/* Users */}
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/users">
+                                <span className="nav-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" className="bi bi-people" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm5 0a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" />
+                                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm11 0h1a2 2 0 0 0 2-2c0-1-2-3-5-3h-1a5.972 5.972 0 0 1 4 5z" />
+                                    </svg>
+                                </span>
+                                <span className="nav-link-text">Users</span>
+                            </Link>
+                        </li>
+
+                        {/* Posts */}
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/posts">
+                                <span className="nav-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" className="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                        <path d="M5.5 7a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zm0 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5z" />
+                                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM13 5h-3.5a1 1 0 0 1-1-1V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5z" />
+                                    </svg>
+                                </span>
+                                <span className="nav-link-text">Posts</span>
+                            </Link>
+                        </li>
+
+                        {/* Comments */}
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/comments">
+                                <span className="nav-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" className="bi bi-chat-left-text" viewBox="0 0 16 16">
+                                        <path d="M14 1a1 1 0 0 1 1 1v11.586l-2-2V2H2a1 1 0 0 1-1-1h13z" />
+                                        <path d="M3 3h10v2H3V3zm0 3h7v2H3V6zm0 3h5v2H3V9z" />
+                                    </svg>
+                                </span>
+                                <span className="nav-link-text">Comments</span>
+                            </Link>
+                        </li>
+
+                        {/* Products */}
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/products">
+                                <span className="nav-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" className="bi bi-box-seam" viewBox="0 0 16 16">
+                                        <path d="M1.5 1a1 1 0 0 1 .832-.445h11.336a1 1 0 0 1 .832.445L16 2.5l-1.5 1.5V13.5a1 1 0 0 1-1 1H2.5a1 1 0 0 1-1-1V4L0 2.5 1.5 1zM2 4.5V13h12V4.5L8 9.5 2 4.5zM1.5 2L8 7l6.5-5H1.5z" />
+                                    </svg>
+                                </span>
+                                <span className="nav-link-text">Products</span>
+                            </Link>
+                        </li>
+
+                        {/* Categories */}
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/categories">
+                                <span className="nav-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" className="bi bi-tags" viewBox="0 0 16 16">
+                                        <path d="M3 2a1 1 0 0 0-1 1v3.586l6.293 6.293a1 1 0 0 0 1.414 0l5.586-5.586a1 1 0 0 0 0-1.414L8.414 2H3zm0 1h5.586l6 6-5.586 5.586L3 6.414V3z" />
+                                        <path d="M5.5 5.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                    </svg>
+                                </span>
+                                <span className="nav-link-text">Categories</span>
+                            </Link>
+                        </li>
+
+                        {/* Subcategories */}
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/subcategories">
+                                <span className="nav-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" className="bi bi-collection" viewBox="0 0 16 16">
+                                        <path d="M2.5 0A1.5 1.5 0 0 0 1 1.5V3h14V1.5A1.5 1.5 0 0 0 13.5 0h-11zM0 4v10.5A1.5 1.5 0 0 0 1.5 16h13a1.5 1.5 0 0 0 1.5-1.5V4H0z" />
+                                    </svg>
+                                </span>
+                                <span className="nav-link-text">Subcategories</span>
+                            </Link>
+                        </li>
                         <li class="nav-item">
                             <Link class="nav-link" to="/orders">
                                 <span class="nav-icon">
@@ -45,95 +121,6 @@ const Sidebar = () => {
                                     </svg>
                                 </span>
                                 <span class="nav-link-text">Orders</span>
-                            </Link>
-                        </li>
-                        <li class="nav-item">
-                            <Link class="nav-link" to="docs.html">
-                                <span class="nav-icon">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-folder" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9.828 4a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 6.173 2H2.5a1 1 0 0 0-1 .981L1.546 4h-1L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3v1z" />
-                                        <path
-                                            fill-rule="evenodd"
-                                            d="M13.81 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zM2.19 3A2 2 0 0 0 .198 5.181l.637 7A2 2 0 0 0 2.826 14h10.348a2 2 0 0 0 1.991-1.819l.637-7A2 2 0 0 0 13.81 3H2.19z"
-                                        />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">Docs</span>
-                            </Link>
-                        </li>
-                        <li class="nav-item has-submenu">
-                            <Link class="nav-link submenu-toggle" to="#" data-bs-toggle="collapse" data-bs-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
-                                <span class="nav-icon">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z" />
-                                        <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">Pages</span>
-                                <span class="submenu-arrow">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                                    </svg>
-                                </span>
-                            </Link>
-                            <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
-                                <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item"><Link class="submenu-link" to="notifications.html">Notifications</Link></li>
-                                    <li class="submenu-item"><Link class="submenu-link" to="account.html">Account</Link></li>
-                                    <li class="submenu-item"><Link class="submenu-link" to="settings.html">Settings</Link></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item has-submenu">
-                            <Link class="nav-link submenu-toggle" to="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
-                                <span class="nav-icon">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-columns-gap" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            fill-rule="evenodd"
-                                            d="M6 1H1v3h5V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm14 12h-5v3h5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5zM6 8H1v7h5V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm14-6h-5v7h5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5z"
-                                        />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">External</span>
-                                <span class="submenu-arrow">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                                    </svg>
-                                </span>
-                            </Link>
-                            <div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
-                                <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item"><Link class="submenu-link" to="login.html">Login</Link></li>
-                                    <li class="submenu-item"><Link class="submenu-link" to="signup.html">Signup</Link></li>
-                                    <li class="submenu-item"><Link class="submenu-link" to="reset-password.html">Reset password</Link></li>
-                                    <li class="submenu-item"><Link class="submenu-link" to="404.html">404 page</Link></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <Link class="nav-link" to="charts.html">
-                                <span class="nav-icon">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            fill-rule="evenodd"
-                                            d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"
-                                        />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">Charts</span>
-                            </Link>
-                        </li>
-                        <li class="nav-item">
-                            <Link class="nav-link" to="help.html">
-                                <span class="nav-icon">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                        <path
-                                            d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"
-                                        />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">Help</span>
                             </Link>
                         </li>
                     </ul>
@@ -169,10 +156,10 @@ const Sidebar = () => {
                             <li className="nav-item">
                                 <Link className="nav-link d-flex align-items-center gap-2" to="/logout">
                                     <span className="nav-icon d-flex align-items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor" className="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                        <path fillRule="evenodd" d="M10 12.5a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 1 1-.708-.708L14.293 13H10.5a.5.5 0 0 1-.5-.5z"/>
-                                        <path fillRule="evenodd" d="M4.5 15A1.5 1.5 0 0 1 3 13.5v-11A1.5 1.5 0 0 1 4.5 1H10a.5.5 0 0 1 0 1H4.5A.5.5 0 0 0 4 2.5v11a.5.5 0 0 0 .5.5H10a.5.5 0 0 1 0 1H4.5z"/>
-                                    </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor" className="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                            <path fillRule="evenodd" d="M10 12.5a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 1 1-.708-.708L14.293 13H10.5a.5.5 0 0 1-.5-.5z" />
+                                            <path fillRule="evenodd" d="M4.5 15A1.5 1.5 0 0 1 3 13.5v-11A1.5 1.5 0 0 1 4.5 1H10a.5.5 0 0 1 0 1H4.5A.5.5 0 0 0 4 2.5v11a.5.5 0 0 0 .5.5H10a.5.5 0 0 1 0 1H4.5z" />
+                                        </svg>
                                     </span>
                                     <span className="nav-link-text">Logout</span>
                                 </Link>
@@ -184,5 +171,4 @@ const Sidebar = () => {
         </div>
     );
 };
-
 export default Sidebar;

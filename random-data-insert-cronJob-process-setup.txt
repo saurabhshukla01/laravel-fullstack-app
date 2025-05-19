@@ -213,4 +213,15 @@ php artisan db:seed
 
 ---
 
+If you run on local so  command :
+
+open to powershell : on vscode ===>
+
+while ($true) { php artisan schedule:run; Start-Sleep -Seconds 60 }
+
+
+---
+
+---
+
 Let me know if you'd like to log each event in a separate file/folder (e.g., `logs/posts/yyyy-mm-dd/`) or send a notification/email after each creation.
