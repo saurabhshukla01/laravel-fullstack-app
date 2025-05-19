@@ -7,7 +7,7 @@ import Footer from './Footer';
 const Layout = ({ children }) => {
   return (
     <div className="app">
-      <header class="app-header fixed-top">
+      <header className="app-header fixed-top">
         <Topbar/>
         <Sidebar />
       </header>

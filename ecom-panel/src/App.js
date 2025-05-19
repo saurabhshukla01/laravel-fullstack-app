@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
@@ -17,6 +18,7 @@ function PrivateRoute({ children }) {
 
 function App() {
   return (
+    <>
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -32,6 +34,8 @@ function App() {
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>
+    <ToastContainer />
+    </>
   );
 }
 
