@@ -84,15 +84,17 @@ const UserList = () => {
             </div>
           </div>
 
-          <nav className="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+          <nav className="users-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
             <a className="flex-sm-fill text-sm-center nav-link active" data-bs-toggle="tab" href="#users-all">All</a>
             <a className="flex-sm-fill text-sm-center nav-link" data-bs-toggle="tab" href="#admins">Admins</a>
             <a className="flex-sm-fill text-sm-center nav-link" data-bs-toggle="tab" href="#non-admins">Users</a>
+            <a className="flex-sm-fill text-sm-center nav-link" data-bs-toggle="tab" href="#user-active">Active</a>
+            <a className="flex-sm-fill text-sm-center nav-link" data-bs-toggle="tab" href="#user-inactive">Inactive</a>
           </nav>
 
           <div className="tab-content">
             <div className="tab-pane fade show active" id="users-all">
-              <div className="app-card app-card-orders-table shadow-sm mb-5">
+              <div className="app-card app-card-users-table shadow-sm mb-5">
                 <div className="app-card-body">
                   <div className="table-responsive">
                     <table className="table app-table-hover mb-0 text-left">
@@ -106,6 +108,7 @@ const UserList = () => {
                           <th className="cell">Age</th>
                           <th className="cell">DOB</th>
                           <th className="cell">Role</th>
+                          <th className="cell">Status</th>
                           <th className="cell">Actions</th>
                         </tr>
                       </thead>
@@ -116,11 +119,11 @@ const UserList = () => {
                               <td className="cell">{index + 1}</td>
                               <td className="cell">
                                 <img
-                                    src={`${process.env.PUBLIC_URL}/assets/images/user.png`}
-                                    className="rounded-circle"
-                                    width="40"
-                                    height="40"
-                                    alt="Profile"
+                                  src={`${process.env.PUBLIC_URL}/assets/images/user.png`}
+                                  className="rounded-circle"
+                                  width="40"
+                                  height="40"
+                                  alt="Profile"
                                 />
                               </td>
                               <td className="cell">{user.name}</td>
@@ -131,6 +134,11 @@ const UserList = () => {
                               <td className="cell">
                                 <span className={`badge ${user.is_admin ? 'bg-primary' : 'bg-secondary'}`}>
                                   {user.is_admin ? 'Admin' : 'User'}
+                                </span>
+                              </td>
+                              <td className="cell">
+                                <span className={`badge ${user.email_verified_at ? 'bg-primary' : 'bg-secondary'}`}>
+                                  {user.email_verified_at ? 'Inactive' : 'Active'}
                                 </span>
                               </td>
                               <td className="cell">
@@ -150,10 +158,284 @@ const UserList = () => {
                 </div>
               </div>
             </div>
+            <div class="tab-content" id="users-table-tab-content">
 
-            {/* Additional Tabs (optional future filters for Admins, Users, etc.) */}
-            <div className="tab-pane fade" id="admins">Coming Soon</div>
-            <div className="tab-pane fade" id="non-admins">Coming Soon</div>
+              <div class="tab-pane fade" id="admins" role="tabpanel" aria-labelledby="user-active-tab">
+                <div class="app-card app-card-users-table mb-5">
+                  <div class="app-card-body">
+                    <div class="table-responsive">
+                      <table class="table mb-0 text-left">
+                        <thead>
+                          <tr>
+                            <th className="cell">#ID</th>
+                            <th className="cell">Profile</th>
+                            <th className="cell">Name</th>
+                            <th className="cell">Email</th>
+                            <th className="cell">Gender</th>
+                            <th className="cell">Age</th>
+                            <th className="cell">DOB</th>
+                            <th className="cell">Role</th>
+                            <th className="cell">Status</th>
+                            <th className="cell">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {users.filter(user => user.is_admin === 1).length > 0 ? (
+                            users
+                              .filter(user => user.is_admin === 1)
+                              .map((user, index) => (
+                                <tr key={user.id}>
+                                  <td className="cell">{index + 1}</td>
+                                  <td className="cell">
+                                    <img
+                                      src={`${process.env.PUBLIC_URL}/assets/images/user.png`}
+                                      className="rounded-circle"
+                                      width="40"
+                                      height="40"
+                                      alt="Profile"
+                                    />
+                                  </td>
+                                  <td className="cell">{user.name}</td>
+                                  <td className="cell">{user.email}</td>
+                                  <td className="cell">{user.gender}</td>
+                                  <td className="cell">{user.age}</td>
+                                  <td className="cell">{user.dob}</td>
+                                  <td className="cell">
+                                    <span className={`badge ${user.is_admin ? 'bg-primary' : 'bg-secondary'}`}>
+                                      {user.is_admin ? 'Admin' : 'User'}
+                                    </span>
+                                  </td>
+                                  <td className="cell">
+                                    <span className={`badge ${user.email_verified_at ? 'bg-primary' : 'bg-secondary'}`}>
+                                      {user.email_verified_at ? 'Inactive' : 'Active'}
+                                    </span>
+                                  </td>
+                                  <td className="cell">
+                                    <button onClick={() => handleEdit(user)} className="btn-sm btn-outline-primary me-1">Edit</button>
+                                    <button onClick={() => handleDelete(user.id)} className="btn-sm btn-outline-danger">Delete</button>
+                                  </td>
+                                </tr>
+                              ))
+                          ) : (
+                            <tr>
+                              <td className="cell text-center" colSpan="10">No users found</td>
+                            </tr>
+                          )}
+                        </tbody>
+
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="non-admins" role="tabpanel" aria-labelledby="user-inactive-tab">
+                <div class="app-card app-card-users-table mb-5">
+                  <div class="app-card-body">
+                    <div class="table-responsive">
+                      <table class="table mb-0 text-left">
+                        <thead>
+                          <tr>
+                            <th className="cell">#ID</th>
+                            <th className="cell">Profile</th>
+                            <th className="cell">Name</th>
+                            <th className="cell">Email</th>
+                            <th className="cell">Gender</th>
+                            <th className="cell">Age</th>
+                            <th className="cell">DOB</th>
+                            <th className="cell">Role</th>
+                            <th className="cell">Status</th>
+                            <th className="cell">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {users.filter(user => user.is_admin === 0).length > 0 ? (
+                            users
+                              .filter(user => user.is_admin === 0)
+                              .map((user, index) => (
+                                <tr key={user.id}>
+                                  <td className="cell">{index + 1}</td>
+                                  <td className="cell">
+                                    <img
+                                      src={`${process.env.PUBLIC_URL}/assets/images/user.png`}
+                                      className="rounded-circle"
+                                      width="40"
+                                      height="40"
+                                      alt="Profile"
+                                    />
+                                  </td>
+                                  <td className="cell">{user.name}</td>
+                                  <td className="cell">{user.email}</td>
+                                  <td className="cell">{user.gender}</td>
+                                  <td className="cell">{user.age}</td>
+                                  <td className="cell">{user.dob}</td>
+                                  <td className="cell">
+                                    <span className={`badge ${user.is_admin ? 'bg-primary' : 'bg-secondary'}`}>
+                                      {user.is_admin ? 'Admin' : 'User'}
+                                    </span>
+                                  </td>
+                                  <td className="cell">
+                                    <span className={`badge ${user.email_verified_at ? 'bg-primary' : 'bg-secondary'}`}>
+                                      {user.email_verified_at ? 'Inactive' : 'Active'}
+                                    </span>
+                                  </td>
+                                  <td className="cell">
+                                    <button onClick={() => handleEdit(user)} className="btn-sm btn-outline-primary me-1">Edit</button>
+                                    <button onClick={() => handleDelete(user.id)} className="btn-sm btn-outline-danger">Delete</button>
+                                  </td>
+                                </tr>
+                              ))
+                          ) : (
+                            <tr>
+                              <td className="cell text-center" colSpan="10">No users found</td>
+                            </tr>
+                          )}
+                        </tbody>
+
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="user-active" role="tabpanel" aria-labelledby="user-active-tab">
+                <div class="app-card app-card-users-table mb-5">
+                  <div class="app-card-body">
+                    <div class="table-responsive">
+                      <table class="table mb-0 text-left">
+                        <thead>
+                          <tr>
+                            <th className="cell">#ID</th>
+                            <th className="cell">Profile</th>
+                            <th className="cell">Name</th>
+                            <th className="cell">Email</th>
+                            <th className="cell">Gender</th>
+                            <th className="cell">Age</th>
+                            <th className="cell">DOB</th>
+                            <th className="cell">Role</th>
+                            <th className="cell">Status</th>
+                            <th className="cell">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {users.filter(user => user.email_verified_at === null).length > 0 ? (
+                            users
+                              .filter(user => user.email_verified_at === null)
+                              .map((user, index) => (
+                                <tr key={user.id}>
+                                  <td className="cell">{index + 1}</td>
+                                  <td className="cell">
+                                    <img
+                                      src={`${process.env.PUBLIC_URL}/assets/images/user.png`}
+                                      className="rounded-circle"
+                                      width="40"
+                                      height="40"
+                                      alt="Profile"
+                                    />
+                                  </td>
+                                  <td className="cell">{user.name}</td>
+                                  <td className="cell">{user.email}</td>
+                                  <td className="cell">{user.gender}</td>
+                                  <td className="cell">{user.age}</td>
+                                  <td className="cell">{user.dob}</td>
+                                  <td className="cell">
+                                    <span className={`badge ${user.is_admin ? 'bg-primary' : 'bg-secondary'}`}>
+                                      {user.is_admin ? 'Admin' : 'User'}
+                                    </span>
+                                  </td>
+                                  <td className="cell">
+                                    <span className={`badge ${user.email_verified_at ? 'bg-primary' : 'bg-secondary'}`}>
+                                      {user.email_verified_at ? 'Inactive' : 'Active'}
+                                    </span>
+                                  </td>
+                                  <td className="cell">
+                                    <button onClick={() => handleEdit(user)} className="btn-sm btn-outline-primary me-1">Edit</button>
+                                    <button onClick={() => handleDelete(user.id)} className="btn-sm btn-outline-danger">Delete</button>
+                                  </td>
+                                </tr>
+                              ))
+                          ) : (
+                            <tr>
+                              <td className="cell text-center" colSpan="10">No users found</td>
+                            </tr>
+                          )}
+                        </tbody>
+
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="user-inactive" role="tabpanel" aria-labelledby="user-inactive-tab">
+                <div class="app-card app-card-users-table mb-5">
+                  <div class="app-card-body">
+                    <div class="table-responsive">
+                      <table class="table mb-0 text-left">
+                        <thead>
+                          <tr>
+                            <th className="cell">#ID</th>
+                            <th className="cell">Profile</th>
+                            <th className="cell">Name</th>
+                            <th className="cell">Email</th>
+                            <th className="cell">Gender</th>
+                            <th className="cell">Age</th>
+                            <th className="cell">DOB</th>
+                            <th className="cell">Role</th>
+                            <th className="cell">Status</th>
+                            <th className="cell">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {users.filter(user => user.email_verified_at !== null).length > 0 ? (
+                            users
+                              .filter(user => user.email_verified_at !== null)
+                              .map((user, index) => (
+                                <tr key={user.id}>
+                                  <td className="cell">{index + 1}</td>
+                                  <td className="cell">
+                                    <img
+                                      src={`${process.env.PUBLIC_URL}/assets/images/user.png`}
+                                      className="rounded-circle"
+                                      width="40"
+                                      height="40"
+                                      alt="Profile"
+                                    />
+                                  </td>
+                                  <td className="cell">{user.name}</td>
+                                  <td className="cell">{user.email}</td>
+                                  <td className="cell">{user.gender}</td>
+                                  <td className="cell">{user.age}</td>
+                                  <td className="cell">{user.dob}</td>
+                                  <td className="cell">
+                                    <span className={`badge ${user.is_admin ? 'bg-primary' : 'bg-secondary'}`}>
+                                      {user.is_admin ? 'Admin' : 'User'}
+                                    </span>
+                                  </td>
+                                  <td className="cell">
+                                    <span className={`badge ${user.email_verified_at ? 'bg-primary' : 'bg-secondary'}`}>
+                                      {user.email_verified_at ? 'Inactive' : 'Active'}
+                                    </span>
+                                  </td>
+                                  <td className="cell">
+                                    <button onClick={() => handleEdit(user)} className="btn-sm btn-outline-primary me-1">Edit</button>
+                                    <button onClick={() => handleDelete(user.id)} className="btn-sm btn-outline-danger">Delete</button>
+                                  </td>
+                                </tr>
+                              ))
+                          ) : (
+                            <tr>
+                              <td className="cell text-center" colSpan="10">No users found</td>
+                            </tr>
+                          )}
+                        </tbody>
+
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
