@@ -73,7 +73,7 @@ class UserController extends BaseController
             'age'             => 'sometimes|integer|min:0',
             'dob'             => 'sometimes|date',
             'is_admin'        => 'sometimes|boolean',
-            'password'        => 'sometimes|min:6',
+            // 'password'        => 'sometimes|min:6',
         ]);
 
         if ($validator->fails()) {
