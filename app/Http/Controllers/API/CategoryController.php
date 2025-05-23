@@ -10,13 +10,32 @@ use Exception;
 
 class CategoryController extends BaseController
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $categories = Category::all();
-            return $this->sendResponse($categories, __('messages.category_fetched'), StatusCode::OK);
+            // Get paginated categories (10 per page)
+            $categories = Category::paginate(10);
+
+            // Prepare response structure similar to your current format
+            $response = [
+                'success' => true,
+                'message' => __('messages.category_fetched'),
+                'data' => $categories->items(),         // only category items list
+                'meta' => [                       // add pagination metadata
+                    'current_page' => $categories->currentPage(),
+                    'last_page' => $categories->lastPage(),
+                    'per_page' => $categories->perPage(),
+                    'total' => $categories->total(),
+                ],
+            ];
+
+            return response()->json($response, StatusCode::OK);
         } catch (Exception $e) {
-            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+            return response()->json([
+                'success' => false,
+                'message' => __('messages.general_error'),
+                'data' => [],
+            ], StatusCode::SERVER_ERROR);
         }
     }
 
