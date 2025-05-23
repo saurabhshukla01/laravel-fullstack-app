@@ -4,68 +4,103 @@ namespace App\Http\Controllers\API;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController;
+use Illuminate\Support\Facades\Validator;
+use App\Helpers\StatusCode;
+use Exception;
 
 class CommentController extends BaseController
 {
     // Get comments for a specific post
     public function index($postId)
     {
-        $comments = Comment::with('user')->where('post_id', $postId)->get();
-
-        return $this->sendResponse($comments, 'Comments fetched successfully.');
+        try {
+            $comments = Comment::with('user')->where('post_id', $postId)->get();
+            return $this->sendResponse($comments, __('messages.comment_fetched'), StatusCode::OK);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 
     // Store a comment for a specific post
     public function store(Request $request, $postId)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'comment' => 'required|string'
-        ]);
+        try {
+            $validator = Validator::make($request->all(), [
+                'user_id' => 'required|exists:users,id',
+                'comment' => 'required|string'
+            ]);
 
-        $comment = Comment::create([
-            'post_id' => $postId,
-            'user_id' => $request->user_id,
-            'comment' => $request->comment,
-        ]);
+            if ($validator->fails()) {
+                return $this->sendError(__('messages.validation_error'), $validator->errors(), StatusCode::VALIDATION_ERROR);
+            }
 
-        return $this->sendResponse($comment, 'Comment added successfully.');
+            $comment = Comment::create([
+                'post_id' => $postId,
+                'user_id' => $request->user_id,
+                'comment' => $request->comment,
+            ]);
+
+            return $this->sendResponse($comment, __('messages.comment_created'), StatusCode::CREATED);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 
     // Show a single comment
     public function show($id)
     {
-        $comment = Comment::with('user')->find($id);
+        try {
+            $comment = Comment::with('user')->find($id);
 
-        return $comment
-            ? $this->sendResponse($comment, 'Comment fetched successfully.')
-            : $this->sendError('Comment not found.');
+            if (!$comment) {
+                return $this->sendError(__('messages.not_found'), [], StatusCode::NOT_FOUND);
+            }
+
+            return $this->sendResponse($comment, __('messages.comment_fetched'), StatusCode::OK);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 
     // Update a comment
     public function update(Request $request, $id)
     {
-        $comment = Comment::find($id);
-        if (!$comment) return $this->sendError('Comment not found.');
+        try {
+            $comment = Comment::find($id);
+            if (!$comment) {
+                return $this->sendError(__('messages.not_found'), [], StatusCode::NOT_FOUND);
+            }
 
-        $request->validate([
-            'comment' => 'required|string',
-        ]);
+            $validator = Validator::make($request->all(), [
+                'comment' => 'required|string',
+            ]);
 
-        $comment->update([
-            'comment' => $request->comment,
-        ]);
+            if ($validator->fails()) {
+                return $this->sendError(__('messages.validation_error'), $validator->errors(), StatusCode::VALIDATION_ERROR);
+            }
 
-        return $this->sendResponse($comment, 'Comment updated successfully.');
+            $comment->update(['comment' => $request->comment]);
+
+            return $this->sendResponse($comment, __('messages.comment_updated'), StatusCode::OK);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 
     // Delete a comment
     public function destroy($id)
     {
-        $comment = Comment::find($id);
-        if (!$comment) return $this->sendError('Comment not found.');
+        try {
+            $comment = Comment::find($id);
+            if (!$comment) {
+                return $this->sendError(__('messages.not_found'), [], StatusCode::NOT_FOUND);
+            }
 
-        $comment->delete();
-        return $this->sendResponse([], 'Comment deleted successfully.');
+            $comment->delete();
+            return $this->sendResponse([], __('messages.comment_deleted'), StatusCode::OK);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 }

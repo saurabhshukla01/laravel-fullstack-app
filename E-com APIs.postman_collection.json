@@ -524,6 +524,16 @@
 				{
 					"name": "Add User",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -536,17 +546,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/users",
-							"protocol": "http",
+							"raw": "{{local_url}}/users",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{local_url}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"users"
 							]
 						}
@@ -623,6 +627,16 @@
 				{
 					"name": "Update User",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -635,17 +649,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/users/11",
-							"protocol": "http",
+							"raw": "{{local_url}}/users/11",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{local_url}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"users",
 								"11"
 							]
@@ -727,6 +735,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -739,17 +757,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/users/11",
-							"protocol": "http",
+							"raw": "{{local_url}}/users/11",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{local_url}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"users",
 								"11"
 							]
@@ -828,6 +840,16 @@
 				{
 					"name": "Delete User",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -840,17 +862,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/users/11",
-							"protocol": "http",
+							"raw": "{{local_url}}/users/11",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{local_url}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"users",
 								"11"
 							]
@@ -932,6 +948,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -944,17 +970,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/users",
-							"protocol": "http",
+							"raw": "{{local_url}}/users",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{local_url}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"users"
 							]
 						}
@@ -1040,7 +1060,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_id\": 1,\r\n    \"title\" : \"1st Post\",\r\n    \"content\" : \"Post is content api for the level taken.\"\r\n}",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"title\" : \"120th Post\",\r\n    \"content\" : \"Post is content api for the level taken.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1147,7 +1167,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/posts/11",
+							"raw": "http://127.0.0.1:8000/api/posts/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1159,7 +1179,7 @@
 							"path": [
 								"api",
 								"posts",
-								"11"
+								"1"
 							]
 						}
 					},
@@ -3023,6 +3043,209 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"success\": true,\n    \"message\": \"Comment updated successfully.\",\n    \"data\": {\n        \"id\": 12,\n        \"post_id\": 1,\n        \"user_id\": 1,\n        \"comment\": \"This is post is too good for me h\",\n        \"created_at\": \"2025-05-01T07:50:56.000000Z\",\n        \"updated_at\": \"2025-05-01T07:52:43.000000Z\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login APIs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"saurabh.shukla@example.com\",\r\n    \"password\": 123456\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login APIs Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"saurabh.shukla@example.com\",\r\n    \"password\": 123456\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 May 2025 07:56:31 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"token\": \"1|eeTXhEbPGYTp9eF5olP7Ax8ZTGA7pjp9OBDbgizOd51b7dcb\"\n    },\n    \"message\": \"Login successful.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register APIs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Testing\",\r\n    \"email\":\"testing@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register APIs response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Testing\",\r\n    \"email\":\"testing@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 May 2025 07:59:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"token\": \"2|zFtxE9NxAbk11FGLmL3mi0UPY5zRTIpofh7Bwyvv1318c6a6\"\n    },\n    \"message\": \"User registered successfully.\"\n}"
 						}
 					]
 				}

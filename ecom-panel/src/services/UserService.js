@@ -1,27 +1,41 @@
-// services/UserService.js
+// src/services/UserService.js
+
 import axios from 'axios';
 
-const API = 'http://127.0.0.1:8000/api';
+const API_URL = 'http://127.0.0.1:8000/api/users'; // Adjust endpoint as needed
 
-const getAllUsers = () => {
-  return axios.get(`${API}/users`);
+const getToken = () => sessionStorage.getItem('token');
+console.log(sessionStorage);
+const getAllUsers = async () => {
+  return axios.get(API_URL, {
+    headers: { Authorization: `Bearer ${getToken()}` }
+  });
 };
 
-const createUser = (data) => {
-  return axios.post(`${API}/users`, data);
+const createUser = async (data) => {
+  return axios.post(API_URL, data, {
+    headers: { Authorization: `Bearer ${getToken()}` }
+  });
 };
 
-const updateUser = (id, data) => {
-  return axios.put(`${API}/users/${id}`, data);
+const updateUser = async (id, data) => {
+  return axios.put(`${API_URL}/${id}`, data, {
+    headers: { Authorization: `Bearer ${getToken()}` }
+  });
 };
 
-const showUser = (id) => {
-  return axios.get(`${API}/users/${id}`);
+const showUser = async (id) => {
+  return axios.get(`${API_URL}/${id}`, {
+    headers: { Authorization: `Bearer ${getToken()}` }
+  });
 };
 
-const deleteUser = (id) => {
-  return axios.delete(`${API}/users/${id}`);
+const deleteUser = async (id) => {
+  return axios.delete(`${API_URL}/${id}`, {
+    headers: { Authorization: `Bearer ${getToken()}` }
+  });
 };
+
 
 // ✅ This resolves the warning
 const UserService = {
@@ -33,5 +47,3 @@ const UserService = {
 };
 
 export default UserService;
-
-

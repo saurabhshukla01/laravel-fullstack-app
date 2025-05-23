@@ -1,47 +1,100 @@
 <?php
-// File: app/Http/Controllers/API/CategoryController.php
+
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Helpers\StatusCode;
+use Exception;
 
 class CategoryController extends BaseController
 {
     public function index()
     {
-        return $this->sendResponse(Category::all(), 'Categories fetched successfully.');
+        try {
+            $categories = Category::all();
+            return $this->sendResponse($categories, __('messages.category_fetched'), StatusCode::OK);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required']);
-        $category = Category::create($request->only('name', 'description'));
-        return $this->sendResponse($category, 'Category created successfully.');
+        try {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError(__('messages.validation_error'), $validator->errors(), StatusCode::VALIDATION_ERROR);
+            }
+
+            $category = Category::create($request->only('name', 'description'));
+
+            return $this->sendResponse($category, __('messages.category_created'), StatusCode::CREATED);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 
     public function show($id)
     {
-        $category = Category::find($id);
-        return $category
-            ? $this->sendResponse($category, 'Category fetched successfully.')
-            : $this->sendError('Category not found.');
+        try {
+            $category = Category::find($id);
+
+            if (!$category) {
+                return $this->sendError(__('messages.not_found'), [], StatusCode::NOT_FOUND);
+            }
+
+            return $this->sendResponse($category, __('messages.category_fetched'), StatusCode::OK);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        if (!$category) return $this->sendError('Category not found.');
+        try {
+            $category = Category::find($id);
 
-        $category->update($request->only('name', 'description'));
-        return $this->sendResponse($category, 'Category updated successfully.');
+            if (!$category) {
+                return $this->sendError(__('messages.not_found'), [], StatusCode::NOT_FOUND);
+            }
+
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError(__('messages.validation_error'), $validator->errors(), StatusCode::VALIDATION_ERROR);
+            }
+
+            $category->update($request->only('name', 'description'));
+
+            return $this->sendResponse($category, __('messages.category_updated'), StatusCode::OK);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 
     public function destroy($id)
     {
-        $category = Category::find($id);
-        if (!$category) return $this->sendError('Category not found.');
+        try {
+            $category = Category::find($id);
 
-        $category->delete();
-        return $this->sendResponse([], 'Category deleted successfully.');
+            if (!$category) {
+                return $this->sendError(__('messages.not_found'), [], StatusCode::NOT_FOUND);
+            }
+
+            $category->delete();
+
+            return $this->sendResponse([], __('messages.category_deleted'), StatusCode::OK);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 }

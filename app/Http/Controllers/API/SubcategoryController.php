@@ -1,52 +1,104 @@
 <?php
 
-// File: app/Http/Controllers/API/SubcategoryController.php
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Models\Subcategory;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Exception;
+use App\Helpers\StatusCode;
 
 class SubcategoryController extends BaseController
 {
     public function index()
     {
-        return $this->sendResponse(Subcategory::with('category')->get(), 'Subcategories fetched successfully.');
+        try {
+            $subcategories = Subcategory::with('category')->get();
+            return $this->sendResponse($subcategories, __('messages.subcategory_fetched'), StatusCode::OK);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'category_id' => 'required|exists:categories,id'
-        ]);
+        try {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'category_id' => 'required|exists:categories,id',
+            ]);
 
-        $subcategory = Subcategory::create($request->only('name', 'description', 'category_id'));
-        return $this->sendResponse($subcategory, 'Subcategory created successfully.');
+            if ($validator->fails()) {
+                return $this->sendError(__('messages.validation_error'), $validator->errors(), StatusCode::VALIDATION_ERROR);
+            }
+
+            $data = $request->only('name', 'description', 'category_id');
+            $data['slug'] = Str::slug($request->name);
+
+            $subcategory = Subcategory::create($data);
+            return $this->sendResponse($subcategory, __('messages.subcategory_created'), StatusCode::CREATED);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 
     public function show($id)
     {
-        $subcategory = Subcategory::with('category')->find($id);
-        return $subcategory
-            ? $this->sendResponse($subcategory, 'Subcategory fetched successfully.')
-            : $this->sendError('Subcategory not found.');
+        try {
+            $subcategory = Subcategory::with('category')->find($id);
+            if (!$subcategory) {
+                return $this->sendError(__('messages.not_found'), [], StatusCode::NOT_FOUND);
+            }
+            return $this->sendResponse($subcategory, __('messages.subcategory_fetched'), StatusCode::OK);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 
     public function update(Request $request, $id)
     {
-        $subcategory = Subcategory::find($id);
-        if (!$subcategory) return $this->sendError('Subcategory not found.');
+        try {
+            $subcategory = Subcategory::find($id);
+            if (!$subcategory) {
+                return $this->sendError(__('messages.not_found'), [], StatusCode::NOT_FOUND);
+            }
 
-        $subcategory->update($request->only('name', 'description', 'category_id'));
-        return $this->sendResponse($subcategory, 'Subcategory updated successfully.');
+            $validator = Validator::make($request->all(), [
+                'name' => 'sometimes|string|max:255',
+                'description' => 'nullable|string',
+                'category_id' => 'required|exists:categories,id',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError(__('messages.validation_error'), $validator->errors(), StatusCode::VALIDATION_ERROR);
+            }
+
+            $data = $request->only('name', 'description', 'category_id');
+            if ($request->has('name')) {
+                $data['slug'] = Str::slug($request->name);
+            }
+
+            $subcategory->update($data);
+            return $this->sendResponse($subcategory, __('messages.subcategory_updated'), StatusCode::OK);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 
     public function destroy($id)
     {
-        $subcategory = Subcategory::find($id);
-        if (!$subcategory) return $this->sendError('Subcategory not found.');
+        try {
+            $subcategory = Subcategory::find($id);
+            if (!$subcategory) {
+                return $this->sendError(__('messages.not_found'), [], StatusCode::NOT_FOUND);
+            }
 
-        $subcategory->delete();
-        return $this->sendResponse([], 'Subcategory deleted successfully.');
+            $subcategory->delete();
+            return $this->sendResponse([], __('messages.subcategory_deleted'), StatusCode::OK);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
     }
 }
