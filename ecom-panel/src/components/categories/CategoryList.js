@@ -15,22 +15,48 @@ const CategoryList = () => {
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
+  const [filter, setFilter] = useState('option-1');
+  const [search, setSearch] = useState('');
 
-  const fetchCategories = async (page) => {
-    try {
-      const response = await CategoryService.getAllCategories(page); // assume this returns data with pagination info
-      setCategories(response.data);
-      setCurrentPage(response.meta.current_page);
-      setLastPage(response.meta.last_page);
-    } catch (error) {
-      console.error('Failed to fetch categories:', error);
-    }
-  };
+
+  // const fetchCategories = async (page) => {
+  //   try {
+  //     const response = await CategoryService.getAllCategories(page); // assume this returns data with pagination info
+  //     setCategories(response.data);
+  //     setCurrentPage(response.meta.current_page);
+  //     setLastPage(response.meta.last_page);
+  //   } catch (error) {
+  //     console.error('Failed to fetch categories:', error);
+  //   }
+  // };
+
+  const fetchCategories = async (page = 1, selectedFilter = filter, searchTerm = search) => {
+  try {
+    const response = await CategoryService.getAllCategories(page, selectedFilter, searchTerm);
+    setCategories(response.data);
+    setCurrentPage(response.meta.current_page);
+    setLastPage(response.meta.last_page);
+  } catch (error) {
+    console.error('Failed to fetch categories:', error);
+  }
+};
 
   useEffect(() => {
-    fetchCategories(currentPage);
-    // eslint-disable-next-line
-  }, [currentPage]);
+  fetchCategories(currentPage, filter, search);
+  // eslint-disable-next-line
+}, [currentPage, filter, search]);
+
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setCurrentPage(1); // Reset to first page on search
+    fetchCategories(1, filter, search);
+  };
+
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+    setCurrentPage(1); // Reset to first page on filter
+  };
 
 
   const handleShowDetailView = (user) => {
@@ -108,9 +134,12 @@ const CategoryList = () => {
               <div class="page-utilities">
                 <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                   <div class="col-auto">
-                    <form class="table-search-form row gx-1 align-items-center">
+                    <form class="table-search-form row gx-1 align-items-center" onSubmit={handleSearchSubmit}>
                       <div class="col-auto">
-                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search" />
+                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" 
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Search" />
                       </div>
                       <div class="col-auto">
                         <button type="submit" class="btn app-btn-secondary">Search</button>
@@ -118,7 +147,7 @@ const CategoryList = () => {
                     </form>
                   </div>
                   <div class="col-auto">
-                    <select class="form-select w-auto">
+                    <select class="form-select w-auto" value={filter} onChange={handleFilterChange}>
                       <option selected value="option-1">All</option>
                       <option value="option-2">This week</option>
                       <option value="option-3">This month</option>

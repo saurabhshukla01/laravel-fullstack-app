@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\StatusCode;
+use Carbon\Carbon;
 use Exception;
 
 class CategoryController extends BaseController
@@ -13,15 +14,43 @@ class CategoryController extends BaseController
     public function index(Request $request)
     {
         try {
-            // Get paginated categories (10 per page)
-            $categories = Category::paginate(10);
+            $query = Category::query();
 
-            // Prepare response structure similar to your current format
+            // Apply search filter (by name)
+            if ($request->has('search') && !empty($request->search)) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            }
+
+            // Apply date filter
+            if ($request->has('filter')) {
+                switch ($request->filter) {
+                    case 'option-2': // This week
+                        $query->where('created_at', '>=', Carbon::now()->startOfWeek());
+                        break;
+
+                    case 'option-3': // This month
+                        $query->where('created_at', '>=', Carbon::now()->startOfMonth());
+                        break;
+
+                    case 'option-4': // Last 3 months
+                        $query->where('created_at', '>=', Carbon::now()->subMonths(3));
+                        break;
+
+                    case 'option-1': // All — no additional filter needed
+                    default:
+                        // Do nothing
+                        break;
+                }
+            }
+
+            // Paginate results
+            $categories = $query->paginate(10);
+
             $response = [
                 'success' => true,
                 'message' => __('messages.category_fetched'),
-                'data' => $categories->items(),         // only category items list
-                'meta' => [                       // add pagination metadata
+                'data' => $categories->items(),
+                'meta' => [
                     'current_page' => $categories->currentPage(),
                     'last_page' => $categories->lastPage(),
                     'per_page' => $categories->perPage(),

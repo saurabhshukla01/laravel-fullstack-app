@@ -6,15 +6,18 @@ const API_URL = 'http://127.0.0.1:8000/api/categories'; // Adjust endpoint as ne
 
 const getToken = () => sessionStorage.getItem('token');
 
-const getAllCategories = async (page = 1) => {
+const getAllCategories = async (page = 1, filter = '', search = '') => {
   const token = sessionStorage.getItem('token');
-  const response = await axios.get(`${API_URL}?page=${page}`, {
+
+  const response = await axios.get(`${API_URL}?page=${page}&filter=${filter}&search=${encodeURIComponent(search)}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+
   return response.data;
 };
+
 
 const createCategory = async (data) => {
   return axios.post(API_URL, data, {
