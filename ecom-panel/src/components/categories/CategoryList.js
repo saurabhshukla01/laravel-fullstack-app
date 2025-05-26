@@ -18,33 +18,21 @@ const CategoryList = () => {
   const [filter, setFilter] = useState('option-1');
   const [search, setSearch] = useState('');
 
-
-  // const fetchCategories = async (page) => {
-  //   try {
-  //     const response = await CategoryService.getAllCategories(page); // assume this returns data with pagination info
-  //     setCategories(response.data);
-  //     setCurrentPage(response.meta.current_page);
-  //     setLastPage(response.meta.last_page);
-  //   } catch (error) {
-  //     console.error('Failed to fetch categories:', error);
-  //   }
-  // };
-
   const fetchCategories = async (page = 1, selectedFilter = filter, searchTerm = search) => {
-  try {
-    const response = await CategoryService.getAllCategories(page, selectedFilter, searchTerm);
-    setCategories(response.data);
-    setCurrentPage(response.meta.current_page);
-    setLastPage(response.meta.last_page);
-  } catch (error) {
-    console.error('Failed to fetch categories:', error);
-  }
-};
+    try {
+      const response = await CategoryService.getAllCategories(page, selectedFilter, searchTerm);
+      setCategories(response.data);
+      setCurrentPage(response.meta.current_page);
+      setLastPage(response.meta.last_page);
+    } catch (error) {
+      console.error('Failed to fetch categories:', error);
+    }
+  };
 
   useEffect(() => {
-  fetchCategories(currentPage, filter, search);
-  // eslint-disable-next-line
-}, [currentPage, filter, search]);
+    fetchCategories(currentPage, filter, search);
+    // eslint-disable-next-line
+  }, [currentPage, filter, search]);
 
 
   const handleSearchSubmit = (e) => {
@@ -136,10 +124,10 @@ const CategoryList = () => {
                   <div class="col-auto">
                     <form class="table-search-form row gx-1 align-items-center" onSubmit={handleSearchSubmit}>
                       <div class="col-auto">
-                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" 
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        placeholder="Search" />
+                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders"
+                          value={search}
+                          onChange={(e) => setSearch(e.target.value)}
+                          placeholder="Search" />
                       </div>
                       <div class="col-auto">
                         <button type="submit" class="btn app-btn-secondary">Search</button>
@@ -230,11 +218,11 @@ const CategoryList = () => {
                   </li>
                 </ul>
               </nav> */}
-<Pagination
-  currentPage={currentPage}
-  lastPage={lastPage}
-  onPageChange={(page) => setCurrentPage(page)}
-/>
+              <Pagination
+                currentPage={currentPage}
+                lastPage={lastPage}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
             </div>
 
             <div class="tab-pane fade" id="category-active" role="tabpanel" aria-labelledby="category-active-tab">

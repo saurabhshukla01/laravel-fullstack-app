@@ -8,18 +8,75 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Exception;
 use App\Helpers\StatusCode;
+use Carbon\Carbon;
 
 class SubcategoryController extends BaseController
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $subcategories = Subcategory::with('category')->get();
-            return $this->sendResponse($subcategories, __('messages.subcategory_fetched'), StatusCode::OK);
-        } catch (Exception $e) {
-            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+            $query = Subcategory::with('category');
+
+            // Filter by subcategory name
+            if ($request->has('search') && !empty($request->search)) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            }
+
+            // Filter by category name
+            if ($request->has('category_name') && !empty($request->category_name)) {
+                $query->whereHas('category', function ($q) use ($request) {
+                    $q->where('name', 'like', '%' . $request->category_name . '%');
+                });
+            }
+
+            // Filter by created_at date range
+            if ($request->has('filter')) {
+                switch ($request->filter) {
+                    case 'option-2': // This week
+                        $query->where('created_at', '>=', Carbon::now()->startOfWeek());
+                        break;
+
+                    case 'option-3': // This month
+                        $query->where('created_at', '>=', Carbon::now()->startOfMonth());
+                        break;
+
+                    case 'option-4': // Last 3 months
+                        $query->where('created_at', '>=', Carbon::now()->subMonths(3));
+                        break;
+
+                    case 'option-1': // All
+                    default:
+                        // No filter
+                        break;
+                }
+            }
+
+            // Paginate
+            $subcategories = $query->paginate(10);
+
+            // Return response
+            $response = [
+                'success' => true,
+                'message' => __('messages.subcategory_fetched'),
+                'data' => $subcategories->items(),
+                'meta' => [
+                    'current_page' => $subcategories->currentPage(),
+                    'last_page' => $subcategories->lastPage(),
+                    'per_page' => $subcategories->perPage(),
+                    'total' => $subcategories->total(),
+                ],
+            ];
+
+            return response()->json($response, StatusCode::OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => __('messages.general_error'),
+                'data' => [],
+            ], StatusCode::SERVER_ERROR);
         }
     }
+
 
     public function store(Request $request)
     {
