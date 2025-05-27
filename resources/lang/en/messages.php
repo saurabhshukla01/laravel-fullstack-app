@@ -12,6 +12,7 @@ return [
     'user_updated'    => 'User updated successfully.',
     'user_deleted'    => 'User deleted successfully.',
     // Category-specific
+    'category_dropdown_fetched' => 'Category dropdown fetched successfullyy.',
     'category_fetched' => 'Categories fetched successfully.',
     'category_created' => 'Category created successfully.',
     'category_updated' => 'Category updated successfully.',

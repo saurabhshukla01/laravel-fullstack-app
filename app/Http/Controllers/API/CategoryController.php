@@ -14,6 +14,19 @@ class CategoryController extends BaseController
     public function index(Request $request)
     {
         try {
+
+            // Check for dropdown mode
+            if ($request->has('is_dropdown') && $request->is_dropdown == 1) {
+                $categories = Category::select('id', 'name')->get();
+
+                return response()->json([
+                    'success' => true,
+                    'message' => __('messages.category_dropdown_fetched'),
+                    'data' => $categories,
+                ], StatusCode::OK);
+            }
+
+            // Normal listing
             $query = Category::query();
 
             // Apply search filter (by name)
@@ -59,6 +72,8 @@ class CategoryController extends BaseController
             ];
 
             return response()->json($response, StatusCode::OK);
+
+
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,

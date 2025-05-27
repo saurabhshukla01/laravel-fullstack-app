@@ -112,37 +112,37 @@ const CategoryList = () => {
 
   return (
     <Layout>
-      <div class="app-content pt-3 p-md-3 p-lg-4">
-        <div class="container-xl">
-          <div class="row g-3 mb-4 align-items-center justify-content-between">
-            <div class="col-auto">
-              <h1 class="app-page-title mb-0">Categories</h1>
+      <div className="app-content pt-3 p-md-3 p-lg-4">
+        <div className="container-xl">
+          <div className="row g-3 mb-4 align-items-center justify-content-between">
+            <div className="col-auto">
+              <h1 className="app-page-title mb-0">Categories</h1>
             </div>
-            <div class="col-auto">
-              <div class="page-utilities">
-                <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
-                  <div class="col-auto">
-                    <form class="table-search-form row gx-1 align-items-center" onSubmit={handleSearchSubmit}>
-                      <div class="col-auto">
-                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders"
+            <div className="col-auto">
+              <div className="page-utilities">
+                <div className="row g-2 justify-content-start justify-content-md-end align-items-center">
+                  <div className="col-auto">
+                    <form className="table-search-form row gx-1 align-items-center" onSubmit={handleSearchSubmit}>
+                      <div className="col-auto">
+                        <input type="text" id="search-orders" name="searchorders" className="form-control search-orders"
                           value={search}
                           onChange={(e) => setSearch(e.target.value)}
                           placeholder="Search" />
                       </div>
-                      <div class="col-auto">
-                        <button type="submit" class="btn app-btn-secondary">Search</button>
+                      <div className="col-auto">
+                        <button type="submit" className="btn app-btn-secondary">Search</button>
                       </div>
                     </form>
                   </div>
-                  <div class="col-auto">
-                    <select class="form-select w-auto" value={filter} onChange={handleFilterChange}>
+                  <div className="col-auto">
+                    <select className="form-select w-auto" value={filter} onChange={handleFilterChange}>
                       <option selected value="option-1">All</option>
                       <option value="option-2">This week</option>
                       <option value="option-3">This month</option>
                       <option value="option-4">Last 3 months</option>
                     </select>
                   </div>
-                  <div class="col-auto">
+                  <div className="col-auto">
                     <Link className="btn app-btn-secondary" to="#">
                       <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-download me-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
@@ -159,18 +159,18 @@ const CategoryList = () => {
             </div>
           </div>
 
-          <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-            <Link class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" to="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</Link>
-            <Link class="flex-sm-fill text-sm-center nav-link" id="category-active-tab" data-bs-toggle="tab" to="#category-active" role="tab" aria-controls="category-active" aria-selected="false">Active</Link>
-            <Link class="flex-sm-fill text-sm-center nav-link" id="category-inactive-tab" data-bs-toggle="tab" to="#category-inactive" role="tab" aria-controls="category-inactive" aria-selected="false">Inactive</Link>
+          <nav id="orders-table-tab" className="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+            <Link className="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" to="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</Link>
+            <Link className="flex-sm-fill text-sm-center nav-link" id="category-active-tab" data-bs-toggle="tab" to="#category-active" role="tab" aria-controls="category-active" aria-selected="false">Active</Link>
+            <Link className="flex-sm-fill text-sm-center nav-link" id="category-inactive-tab" data-bs-toggle="tab" to="#category-inactive" role="tab" aria-controls="category-inactive" aria-selected="false">Inactive</Link>
           </nav>
 
-          <div class="tab-content" id="orders-table-tab-content">
-            <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
-              <div class="app-card app-card-orders-table shadow-sm mb-5">
-                <div class="app-card-body">
-                  <div class="table-responsive">
-                    <table class="table app-table-hover mb-0 text-left">
+          <div className="tab-content" id="orders-table-tab-content">
+            <div className="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+              <div className="app-card app-card-orders-table shadow-sm mb-5">
+                <div className="app-card-body">
+                  <div className="table-responsive">
+                    <table className="table app-table-hover mb-0 text-left">
                       <thead>
                         <tr>
                           <th className="cell">#Sr.</th>
@@ -186,8 +186,8 @@ const CategoryList = () => {
                             <tr key={category.id}>
                               <td className="cell">#{index + 1}</td>
                               <td className="cell">{category.name}</td>
-                              <td class="cell"><span class="truncate">{category.description}</span></td>
-                              <td class="cell"><span class="badge bg-success">Active</span></td>
+                              <td className="cell"><span className="truncate">{category.description}</span></td>
+                              <td className="cell"><span className="badge bg-success">Active</span></td>
                               <td className="cell">
                                 <button onClick={() => handleEdit(category)} className="btn-sm btn-outline-primary me-1">Edit</button>
                                 <button onClick={() => handleShowDetailView(category)} className="btn-sm btn-outline-secondary me-1">Show</button>
@@ -205,19 +205,6 @@ const CategoryList = () => {
                   </div>
                 </div>
               </div>
-              {/* <nav class="app-pagination">
-                <ul class="pagination justify-content-center">
-                  <li class="page-item disabled">
-                    <Link class="page-link" to="#" tabindex="-1" aria-disabled="true">Previous</Link>
-                  </li>
-                  <li class="page-item active"><Link class="page-link" to="#">1</Link></li>
-                  <li class="page-item"><Link class="page-link" to="#">2</Link></li>
-                  <li class="page-item"><Link class="page-link" to="#">3</Link></li>
-                  <li class="page-item">
-                    <Link class="page-link" to="#">Next</Link>
-                  </li>
-                </ul>
-              </nav> */}
               <Pagination
                 currentPage={currentPage}
                 lastPage={lastPage}
@@ -225,17 +212,17 @@ const CategoryList = () => {
               />
             </div>
 
-            <div class="tab-pane fade" id="category-active" role="tabpanel" aria-labelledby="category-active-tab">
-              <div class="app-card app-card-orders-table mb-5">
-                <div class="app-card-body text-center">
+            <div className="tab-pane fade" id="category-active" role="tabpanel" aria-labelledby="category-active-tab">
+              <div className="app-card app-card-orders-table mb-5">
+                <div className="app-card-body text-center">
                   <strong>Filter by Active categories coming soon...</strong>
                 </div>
               </div>
             </div>
 
-            <div class="tab-pane fade" id="category-inactive" role="tabpanel" aria-labelledby="category-inactive-tab">
-              <div class="app-card app-card-orders-table mb-5">
-                <div class="app-card-body text-center">
+            <div className="tab-pane fade" id="category-inactive" role="tabpanel" aria-labelledby="category-inactive-tab">
+              <div className="app-card app-card-orders-table mb-5">
+                <div className="app-card-body text-center">
                   <strong>Filter by Inactive categories coming soon...</strong>
                 </div>
               </div>

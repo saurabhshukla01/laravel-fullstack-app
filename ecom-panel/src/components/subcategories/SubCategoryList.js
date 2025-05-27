@@ -6,9 +6,10 @@ import { toast } from 'react-toastify';
 import Pagination from '../common/Pagination';
 import SubCategoryService from '../../services/SubCategoryService';
 import SubCategoryDetailModal from './SubCategoryDetailModal';
+import CategoryService from '../../services/CategoryService';
 const SubCategoryList = () => {
   const [subCategories, setSubCategories] = useState([]);
-  const [form, setForm] = useState({ name: '', description: '' });
+  const [form, setForm] = useState({ name: '', description: '', category_id: '' });
   const [editId, setEditId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedSubCategory, setselectedSubCategory] = useState(null);
@@ -17,6 +18,30 @@ const SubCategoryList = () => {
   const [lastPage, setLastPage] = useState(1);
   const [filter, setFilter] = useState('option-1');
   const [search, setSearch] = useState('');
+  const [categories, setCategories] = useState([]);
+
+
+  useEffect(() => {
+    if (showModal) {
+      fetchDropdownCategories();
+    }
+  }, [showModal]);
+
+  const fetchDropdownCategories = async () => {
+    try {
+      const data = await CategoryService.getDropdownCategories();
+      console.log(data)
+      if (data.success) {
+        setCategories(data.data);
+      } else {
+        console.error('Failed to fetch categories:', data.message);
+      }
+    } catch (err) {
+      console.error('Error fetching categories:', err);
+    }
+  };
+
+
 
   const fetchSubCategories = async (page = 1, selectedFilter = filter, searchTerm = search) => {
     try {
@@ -58,7 +83,7 @@ const SubCategoryList = () => {
   };
 
   const resetForm = () => {
-    setForm({ name: '', description: '' });
+    setForm({ name: '', description: '' , category_id: '' });
     setEditId(null);
     setShowModal(false);
   };
@@ -90,7 +115,8 @@ const SubCategoryList = () => {
       setEditId(category.id); // set edit mode
       setForm({
         name: category.name || '',
-        description: category.description || ''
+        description: category.description || '',
+        category_id: category.category_id || ''
       });
       setShowModal(true);
     } catch (err) {
@@ -112,37 +138,37 @@ const SubCategoryList = () => {
 
   return (
     <Layout>
-      <div class="app-content pt-3 p-md-3 p-lg-4">
-        <div class="container-xl">
-          <div class="row g-3 mb-4 align-items-center justify-content-between">
-            <div class="col-auto">
-              <h1 class="app-page-title mb-0">Sub Categories</h1>
+      <div className="app-content pt-3 p-md-3 p-lg-4">
+        <div className="container-xl">
+          <div className="row g-3 mb-4 align-items-center justify-content-between">
+            <div className="col-auto">
+              <h1 className="app-page-title mb-0">Sub Categories</h1>
             </div>
-            <div class="col-auto">
-              <div class="page-utilities">
-                <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
-                  <div class="col-auto">
-                    <form class="table-search-form row gx-1 align-items-center" onSubmit={handleSearchSubmit}>
-                      <div class="col-auto">
-                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders"
+            <div className="col-auto">
+              <div className="page-utilities">
+                <div className="row g-2 justify-content-start justify-content-md-end align-items-center">
+                  <div className="col-auto">
+                    <form className="table-search-form row gx-1 align-items-center" onSubmit={handleSearchSubmit}>
+                      <div className="col-auto">
+                        <input type="text" id="search-orders" name="searchorders" className="form-control search-orders"
                           value={search}
                           onChange={(e) => setSearch(e.target.value)}
                           placeholder="Search" />
                       </div>
-                      <div class="col-auto">
-                        <button type="submit" class="btn app-btn-secondary">Search</button>
+                      <div className="col-auto">
+                        <button type="submit" className="btn app-btn-secondary">Search</button>
                       </div>
                     </form>
                   </div>
-                  <div class="col-auto">
-                    <select class="form-select w-auto" value={filter} onChange={handleFilterChange}>
+                  <div className="col-auto">
+                    <select className="form-select w-auto" value={filter} onChange={handleFilterChange}>
                       <option selected value="option-1">All</option>
                       <option value="option-2">This week</option>
                       <option value="option-3">This month</option>
                       <option value="option-4">Last 3 months</option>
                     </select>
                   </div>
-                  <div class="col-auto">
+                  <div className="col-auto">
                     <Link className="btn app-btn-secondary" to="#">
                       <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-download me-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
@@ -152,30 +178,31 @@ const SubCategoryList = () => {
                     </Link>
                   </div>
                   <div className="col-auto">
-                    <button onClick={() => setShowModal(true)} className="btn app-btn-primary">Add Category</button>
+                    <button onClick={() => setShowModal(true)} className="btn app-btn-primary">Add Sub Category</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-            <Link class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" to="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</Link>
-            <Link class="flex-sm-fill text-sm-center nav-link" id="category-active-tab" data-bs-toggle="tab" to="#category-active" role="tab" aria-controls="category-active" aria-selected="false">Active</Link>
-            <Link class="flex-sm-fill text-sm-center nav-link" id="category-inactive-tab" data-bs-toggle="tab" to="#category-inactive" role="tab" aria-controls="category-inactive" aria-selected="false">Inactive</Link>
+          <nav id="orders-table-tab" className="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+            <Link className="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" to="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</Link>
+            <Link className="flex-sm-fill text-sm-center nav-link" id="category-active-tab" data-bs-toggle="tab" to="#category-active" role="tab" aria-controls="category-active" aria-selected="false">Active</Link>
+            <Link className="flex-sm-fill text-sm-center nav-link" id="category-inactive-tab" data-bs-toggle="tab" to="#category-inactive" role="tab" aria-controls="category-inactive" aria-selected="false">Inactive</Link>
           </nav>
 
-          <div class="tab-content" id="orders-table-tab-content">
-            <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
-              <div class="app-card app-card-orders-table shadow-sm mb-5">
-                <div class="app-card-body">
-                  <div class="table-responsive">
-                    <table class="table app-table-hover mb-0 text-left">
+          <div className="tab-content" id="orders-table-tab-content">
+            <div className="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+              <div className="app-card app-card-orders-table shadow-sm mb-5">
+                <div className="app-card-body">
+                  <div className="table-responsive">
+                    <table className="table app-table-hover mb-0 text-left">
                       <thead>
                         <tr>
                           <th className="cell">#Sr.</th>
                           <th className="cell">Name</th>
                           <th className="cell">Description</th>
+                          <th className="cell">Category</th>
                           <th className="cell">Status</th>
                           <th className="cell">Actions</th>
                         </tr>
@@ -186,8 +213,9 @@ const SubCategoryList = () => {
                             <tr key={sub_category.id}>
                               <td className="cell">#{index + 1}</td>
                               <td className="cell">{sub_category.name}</td>
-                              <td class="cell"><span class="truncate">{sub_category.description}</span></td>
-                              <td class="cell"><span class="badge bg-success">Active</span></td>
+                              <td className="cell"><span className="truncate">{sub_category.description}</span></td>
+                              <td className="cell">{sub_category.category.name}</td>
+                              <td className="cell"><span className="badge bg-success">Active</span></td>
                               <td className="cell">
                                 <button onClick={() => handleEdit(sub_category)} className="btn-sm btn-outline-primary me-1">Edit</button>
                                 <button onClick={() => handleShowDetailView(sub_category)} className="btn-sm btn-outline-secondary me-1">Show</button>
@@ -212,17 +240,17 @@ const SubCategoryList = () => {
               />
             </div>
 
-            <div class="tab-pane fade" id="category-active" role="tabpanel" aria-labelledby="category-active-tab">
-              <div class="app-card app-card-orders-table mb-5">
-                <div class="app-card-body text-center">
+            <div className="tab-pane fade" id="category-active" role="tabpanel" aria-labelledby="category-active-tab">
+              <div className="app-card app-card-orders-table mb-5">
+                <div className="app-card-body text-center">
                   <strong>Filter by Active sub categories coming soon...</strong>
                 </div>
               </div>
             </div>
 
-            <div class="tab-pane fade" id="category-inactive" role="tabpanel" aria-labelledby="category-inactive-tab">
-              <div class="app-card app-card-orders-table mb-5">
-                <div class="app-card-body text-center">
+            <div className="tab-pane fade" id="category-inactive" role="tabpanel" aria-labelledby="category-inactive-tab">
+              <div className="app-card app-card-orders-table mb-5">
+                <div className="app-card-body text-center">
                   <strong>Filter by Inactive sub categories coming soon...</strong>
                 </div>
               </div>
@@ -238,7 +266,7 @@ const SubCategoryList = () => {
               <div className="modal-dialog modal-xl">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h5 className="modal-title">{editId ? 'Edit Category' : 'Add Category'}</h5>
+                    <h5 className="modal-title">{editId ? 'Edit Sub Category' : 'Add Sub Category'}</h5>
                     <button type="button" className="btn-close" onClick={resetForm}></button>
                   </div>
                   <form onSubmit={handleSubmit}>
@@ -255,6 +283,22 @@ const SubCategoryList = () => {
                           />
                         </div>
                         <div className="col-md-12">
+                          <label className="form-label">Category</label>
+                          <select
+                            className="form-select"
+                            value={form.category_id || ''}
+                            onChange={(e) => setForm({ ...form, category_id: e.target.value })}
+                          >
+                            <option value="">Select Category</option>
+                            {categories.map((cat) => (
+                              <option key={cat.id} value={cat.id}>
+                                {cat.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div className="col-md-12">
                           <label className="form-label">Description</label>
                           <textarea
                             className="form-control"
@@ -263,7 +307,7 @@ const SubCategoryList = () => {
                             required
                           />
                           <div className="form-text">
-                            Please update the description to reflect the latest details of this category.
+                            Please update the description to reflect the latest details of this sub category.
                           </div>
                         </div>
 
@@ -274,7 +318,7 @@ const SubCategoryList = () => {
                         Cancel
                       </button>
                       <button type="submit" className="btn btn-primary">
-                        {editId ? 'Update' : 'Add'} Category
+                        {editId ? 'Update' : 'Add'} Sub Category
                       </button>
                     </div>
                   </form>
