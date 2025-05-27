@@ -6,13 +6,14 @@ return [
     'login_success' => 'Login successful.',
     'invalid_credentials' => 'Invalid credentials.',
     // User-specific
+    'user_dropdown_fetched' => 'User dropdown fetched successfully.',
     'users_fetched'   => 'Users fetched successfully.',
     'user_fetched'    => 'User fetched successfully.',
     'user_created'    => 'User created successfully.',
     'user_updated'    => 'User updated successfully.',
     'user_deleted'    => 'User deleted successfully.',
     // Category-specific
-    'category_dropdown_fetched' => 'Category dropdown fetched successfullyy.',
+    'category_dropdown_fetched' => 'Category dropdown fetched successfully.',
     'category_fetched' => 'Categories fetched successfully.',
     'category_created' => 'Category created successfully.',
     'category_updated' => 'Category updated successfully.',

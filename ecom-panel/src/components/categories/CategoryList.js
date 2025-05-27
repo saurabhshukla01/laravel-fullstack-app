@@ -93,13 +93,13 @@ const CategoryList = () => {
         description: category.description || ''
       });
       setShowModal(true);
-    } catch (err) {
-      toast.error('Failed to fetch user details');
+    } catch (error) {
+      toast.error('Failed to fetch user details',error);
     }
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this user?')) {
+    if (window.confirm('Are you sure you want to delete this category?')) {
       try {
         await CategoryService.deleteCategory(id);
         toast.success('Category deleted successfully');

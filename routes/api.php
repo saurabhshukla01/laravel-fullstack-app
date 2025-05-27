@@ -20,6 +20,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/categories', CategoryController::class);
     // subcategories api routes
     Route::apiResource('/subcategories', SubcategoryController::class);
+    // posts api routes
+    Route::apiResource('/posts', PostController::class);
 });
 
 
@@ -35,7 +37,5 @@ Route::prefix('posts/{postId}')->group(function () {
 Route::get('comments/{id}', [CommentController::class, 'show']);
 Route::put('comments/{id}', [CommentController::class, 'update']);
 Route::delete('comments/{id}', [CommentController::class, 'destroy']);
-// posts api routes
-Route::apiResource('/posts', PostController::class);
 // products api routes
 Route::apiResource('/products', ProductController::class);

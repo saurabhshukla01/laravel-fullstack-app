@@ -11,9 +11,21 @@ use Exception;
 class UserController extends BaseController
 {
     // List all users
-    public function index()
+    public function index(Request $request)
     {
         try {
+            // Check for dropdown mode
+            if ($request->has('is_dropdown') && $request->is_dropdown == 1) {
+                $users = User::select('id', 'name')->get();
+
+                return response()->json([
+                    'success' => true,
+                    'message' => __('messages.user_dropdown_fetched'),
+                    'data' => $users,
+                ], StatusCode::OK);
+            }
+
+            // Normal listing
             $users = User::all();
             return $this->sendResponse($users, __('messages.users_fetched'), StatusCode::OK);
         } catch (Exception $e) {

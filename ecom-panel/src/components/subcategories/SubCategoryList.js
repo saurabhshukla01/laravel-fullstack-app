@@ -91,17 +91,17 @@ const SubCategoryList = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (!form.name || !form.description) {
+      if (!form.name || !form.description || !form.category_id) {
         toast.error('Please fill in all required fields');
         return;
       }
 
       if (editId) {
         await SubCategoryService.updateSubCategory(editId, form);
-        toast.success('Category updated successfully');
+        toast.success('Sub Category updated successfully');
       } else {
         await SubCategoryService.createSubCategory(form);
-        toast.success('Category created successfully');
+        toast.success('Sub Category created successfully');
       }
       resetForm();
       fetchSubCategories();
@@ -120,18 +120,18 @@ const SubCategoryList = () => {
       });
       setShowModal(true);
     } catch (err) {
-      toast.error('Failed to fetch user details');
+      toast.error('Failed to fetch sub category details');
     }
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this user?')) {
+    if (window.confirm('Are you sure you want to delete this sub category?')) {
       try {
         await SubCategoryService.deleteSubCategory(id);
-        toast.success('Category deleted successfully');
+        toast.success('Sub Category deleted successfully');
         fetchSubCategories();
       } catch (err) {
-        toast.error('Failed to delete category');
+        toast.error('Failed to delete sub category');
       }
     }
   };

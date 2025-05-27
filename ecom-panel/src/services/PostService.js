@@ -1,15 +1,15 @@
-// src/services/UserService.js
+// src/services/PostService.js
 
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:8000/api/users'; // Adjust endpoint as needed
+const API_URL = 'http://127.0.0.1:8000/api/posts'; // Adjust endpoint as needed
 
 const getToken = () => sessionStorage.getItem('token');
 
-const getDropdownUsers = async () => {
+const getAllPosts = async (page = 1, filter = '', search = '') => {
   const token = sessionStorage.getItem('token');
 
-  const response = await axios.get(`${API_URL}?is_dropdown=1`, {
+  const response = await axios.get(`${API_URL}?page=${page}&filter=${filter}&search=${encodeURIComponent(search)}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -18,31 +18,26 @@ const getDropdownUsers = async () => {
   return response.data;
 };
 
-const getAllUsers = async () => {
-  return axios.get(API_URL, {
-    headers: { Authorization: `Bearer ${getToken()}` }
-  });
-};
 
-const createUser = async (data) => {
+const createPost = async (data) => {
   return axios.post(API_URL, data, {
     headers: { Authorization: `Bearer ${getToken()}` }
   });
 };
 
-const updateUser = async (id, data) => {
+const updatePost = async (id, data) => {
   return axios.put(`${API_URL}/${id}`, data, {
     headers: { Authorization: `Bearer ${getToken()}` }
   });
 };
 
-const showUser = async (id) => {
+const showPost = async (id) => {
   return axios.get(`${API_URL}/${id}`, {
     headers: { Authorization: `Bearer ${getToken()}` }
   });
 };
 
-const deleteUser = async (id) => {
+const deletePost = async (id) => {
   return axios.delete(`${API_URL}/${id}`, {
     headers: { Authorization: `Bearer ${getToken()}` }
   });
@@ -50,13 +45,12 @@ const deleteUser = async (id) => {
 
 
 // ✅ This resolves the warning
-const UserService = {
-  getDropdownUsers,
-  getAllUsers,
-  createUser,
-  updateUser,
-  showUser,
-  deleteUser,
+const PostService = {
+  getAllPosts,
+  createPost,
+  updatePost,
+  showPost,
+  deletePost,
 };
 
-export default UserService;
+export default PostService;

@@ -8,19 +8,67 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\API\BaseController;
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\StatusCode;
+use Carbon\Carbon;
 use Exception;
 
 class PostController extends BaseController
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $posts = Post::with(['user', 'comments.user'])->get();
-            return $this->sendResponse($posts, __('messages.post_fetched'), StatusCode::OK);
-        } catch (Exception $e) {
+            $query = Post::with(['user', 'comments.user']);
+
+            // Filter by post title
+            if ($request->has('search') && !empty($request->search)) {
+                $query->where('title', 'like', '%' . $request->search . '%');
+            }
+
+            // Filter by user name
+            if ($request->has('user_name') && !empty($request->user_name)) {
+                $query->whereHas('user', function ($q) use ($request) {
+                    $q->where('name', 'like', '%' . $request->user_name . '%');
+                });
+            }
+
+            // Filter by created_at date range
+            if ($request->has('filter')) {
+                switch ($request->filter) {
+                    case 'option-2': // This week
+                        $query->where('created_at', '>=', Carbon::now()->startOfWeek());
+                        break;
+                    case 'option-3': // This month
+                        $query->where('created_at', '>=', Carbon::now()->startOfMonth());
+                        break;
+                    case 'option-4': // Last 3 months
+                        $query->where('created_at', '>=', Carbon::now()->subMonths(3));
+                        break;
+                    case 'option-1': // All
+                    default:
+                        // No filter
+                        break;
+                }
+            }
+
+            // Paginate results
+            $posts = $query->paginate(10);
+
+            // Construct response
+            return response()->json([
+                'success' => true,
+                'message' => __('messages.post_fetched'),
+                'data' => $posts->items(),
+                'meta' => [
+                    'current_page' => $posts->currentPage(),
+                    'last_page' => $posts->lastPage(),
+                    'per_page' => $posts->perPage(),
+                    'total' => $posts->total(),
+                ],
+            ], StatusCode::OK);
+        } catch (\Exception $e) {
             return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
         }
     }
+
 
     public function store(Request $request)
     {
