@@ -3,17 +3,21 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\CommentController;
+use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\SubcategoryController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    // dashboard api routes
+    Route::get('/dashboard', [DashboardController::class, 'index']);
     // users api routes
     Route::apiResource('/users', UserController::class);
     // categories api routes
@@ -22,20 +26,19 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/subcategories', SubcategoryController::class);
     // posts api routes
     Route::apiResource('/posts', PostController::class);
+    // create comments routes api 
+    Route::prefix('posts/{postId}')->group(function () {
+        Route::get('comments', [CommentController::class, 'index']);
+        Route::post('comments', [CommentController::class, 'store']);
+    });
+    Route::get('comments/{id}', [CommentController::class, 'show']);
+    Route::put('comments/{id}', [CommentController::class, 'update']);
+    Route::delete('comments/{id}', [CommentController::class, 'destroy']);
+    // products api routes
+    Route::apiResource('/products', ProductController::class);
 });
 
 
 Route::get('/status', function () {
     return response()->json(['status' => 'API is working!']);
 });
-
-// create comments routes api 
-Route::prefix('posts/{postId}')->group(function () {
-    Route::get('comments', [CommentController::class, 'index']);
-    Route::post('comments', [CommentController::class, 'store']);
-});
-Route::get('comments/{id}', [CommentController::class, 'show']);
-Route::put('comments/{id}', [CommentController::class, 'update']);
-Route::delete('comments/{id}', [CommentController::class, 'destroy']);
-// products api routes
-Route::apiResource('/products', ProductController::class);

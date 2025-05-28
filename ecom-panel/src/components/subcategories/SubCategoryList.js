@@ -12,7 +12,7 @@ const SubCategoryList = () => {
   const [form, setForm] = useState({ name: '', description: '', category_id: '' });
   const [editId, setEditId] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [selectedSubCategory, setselectedSubCategory] = useState(null);
+  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
@@ -73,13 +73,13 @@ const SubCategoryList = () => {
 
 
   const handleShowDetailView = (user) => {
-    setselectedSubCategory(user);
+    setSelectedSubCategory(user);
     setShowDetailModal(true);
   };
 
   const closeShowDetailModal = () => {
     setShowDetailModal(false);
-    setselectedSubCategory(null);
+    setSelectedSubCategory(null);
   };
 
   const resetForm = () => {

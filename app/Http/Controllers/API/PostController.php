@@ -77,8 +77,8 @@ class PostController extends BaseController
                 'user_id' => 'required|exists:users,id',
                 'title' => 'required|string|max:255',
                 'content' => 'required|string',
-                'image' => 'nullable|string',
-                'status' => 'nullable|in:active,inactive',
+                'image' => 'nullable|string', 
+                'status' => 'nullable|in:draft,published',
             ]);
 
             if ($validator->fails()) {
@@ -121,7 +121,7 @@ class PostController extends BaseController
                 'title' => 'sometimes|string|max:255',
                 'content' => 'sometimes|string',
                 'image' => 'nullable|string',
-                'status' => 'nullable|in:active,inactive',
+                'status' => 'nullable|in:draft,published',
             ]);
 
             if ($validator->fails()) {

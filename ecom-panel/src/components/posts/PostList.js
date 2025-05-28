@@ -9,10 +9,11 @@ import PostDetailModal from './PostDetailModal';
 import UserService from '../../services/UserService';
 const PostList = () => {
   const [posts, setPosts] = useState([]);
-  const [form, setForm] = useState({ name: '', description: '', Post_id: '' });
+  const [users, setUsers] = useState([]);
+  const [form, setForm] = useState({ title: '', content: '', user_id: '', status: '' });
   const [editId, setEditId] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [selectedPost, setselectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
@@ -31,7 +32,7 @@ const PostList = () => {
       const data = await UserService.getDropdownUsers();
       console.log(data)
       if (data.success) {
-        setPosts(data.data);
+        setUsers(data.data);
       } else {
         console.error('Failed to fetch users:', data.message);
       }
@@ -71,18 +72,18 @@ const PostList = () => {
   };
 
 
-  const handleShowDetailView = (user) => {
-    setselectedPost(user);
+  const handleShowDetailView = (post) => {
+    setSelectedPost(post);
     setShowDetailModal(true);
   };
 
   const closeShowDetailModal = () => {
     setShowDetailModal(false);
-    setselectedPost(null);
+    setSelectedPost(null);
   };
 
   const resetForm = () => {
-    setForm({ title: '', content: '', user_id: '', status: "" });
+    setForm({ title: '', content: '', user_id: '', status: '' });
     setEditId(null);
     setShowModal(false);
   };
@@ -105,7 +106,7 @@ const PostList = () => {
       resetForm();
       fetchPosts();
     } catch (err) {
-      toast.error('Failed to save user');
+      toast.error('Failed to save user', err);
     }
   };
 
@@ -187,8 +188,8 @@ const PostList = () => {
 
           <nav id="orders-table-tab" className="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
             <Link className="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" to="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</Link>
-            <Link className="flex-sm-fill text-sm-center nav-link" id="Post-active-tab" data-bs-toggle="tab" to="#Post-active" role="tab" aria-controls="Post-active" aria-selected="false">Active</Link>
-            <Link className="flex-sm-fill text-sm-center nav-link" id="Post-inactive-tab" data-bs-toggle="tab" to="#Post-inactive" role="tab" aria-controls="Post-inactive" aria-selected="false">Inactive</Link>
+            <Link className="flex-sm-fill text-sm-center nav-link" id="category-active-tab" data-bs-toggle="tab" to="#category-active" role="tab" aria-controls="category-active" aria-selected="false">Draft</Link>
+            <Link className="flex-sm-fill text-sm-center nav-link" id="category-inactive-tab" data-bs-toggle="tab" to="#category-inactive" role="tab" aria-controls="category-inactive" aria-selected="false">Published</Link>
           </nav>
 
           <div className="tab-content" id="orders-table-tab-content">
@@ -218,10 +219,10 @@ const PostList = () => {
                               <td className="cell">
                                 <span
                                   className={`badge ${post.status === "published"
-                                      ? "bg-success"
-                                      : post.status === "draft"
-                                        ? "bg-warning text-dark"
-                                        : "bg-secondary"
+                                    ? "bg-success"
+                                    : post.status === "draft"
+                                      ? "bg-warning text-dark"
+                                      : "bg-secondary"
                                     }`}
                                 >
                                   {post.status.charAt(0).toUpperCase() + post.status.slice(1)}
@@ -244,28 +245,125 @@ const PostList = () => {
                   </div>
                 </div>
               </div>
-              <Pagination
-                currentPage={currentPage}
-                lastPage={lastPage}
-                onPageChange={(page) => setCurrentPage(page)}
-              />
             </div>
 
-            <div className="tab-pane fade" id="Post-active" role="tabpanel" aria-labelledby="Post-active-tab">
+            <div className="tab-pane fade" id="category-active" role="tabpanel" aria-labelledby="category-active-tab">
               <div className="app-card app-card-orders-table mb-5">
                 <div className="app-card-body text-center">
-                  <strong>Filter by Active posts coming soon...</strong>
+                  <div className="table-responsive">
+                    <table className="table app-table-hover mb-0 text-left">
+                      <thead>
+                        <tr>
+                          <th className="cell">#Sr.</th>
+                          <th className="cell">Title</th>
+                          <th className="cell">Content</th>
+                          <th className="cell">User</th>
+                          <th className="cell">Status</th>
+                          <th className="cell">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {posts.filter(post => post.status === 'draft').length > 0 ? (
+                          posts
+                            .filter(post => post.status === 'draft')
+                            .map((post, index) => (
+                              <tr key={post.id}>
+                                <td className="cell">#{index + 1}</td>
+                                <td className="cell"><span className="truncate">{post.title}</span></td>
+                                <td className="cell"><span className="truncate">{post.content}</span></td>
+                                <td className="cell">{post.user.name}</td>
+                                <td className="cell">
+                                  <span
+                                    className={`badge ${post.status === "published"
+                                      ? "bg-success"
+                                      : post.status === "draft"
+                                        ? "bg-warning text-dark"
+                                        : "bg-secondary"
+                                      }`}
+                                  >
+                                    {post.status.charAt(0).toUpperCase() + post.status.slice(1)}
+                                  </span>
+                                </td>
+                                <td className="cell">
+                                  <button onClick={() => handleEdit(post)} className="btn-sm btn-outline-primary me-1">Edit</button>
+                                  <button onClick={() => handleShowDetailView(post)} className="btn-sm btn-outline-secondary me-1">Show</button>
+                                  <button onClick={() => handleDelete(post.id)} className="btn-sm btn-outline-danger">Delete</button>
+                                </td>
+                              </tr>
+                            ))
+                        ) : (
+                          <tr>
+                            <td className="cell text-center" colSpan="10">No users found</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="tab-pane fade" id="Post-inactive" role="tabpanel" aria-labelledby="Post-inactive-tab">
+            <div className="tab-pane fade" id="category-inactive" role="tabpanel" aria-labelledby="category-inactive-tab">
               <div className="app-card app-card-orders-table mb-5">
                 <div className="app-card-body text-center">
-                  <strong>Filter by Inactive posts coming soon...</strong>
+                  <div className="table-responsive">
+                    <table className="table app-table-hover mb-0 text-left">
+                      <thead>
+                        <tr>
+                          <th className="cell">#Sr.</th>
+                          <th className="cell">Title</th>
+                          <th className="cell">Content</th>
+                          <th className="cell">User</th>
+                          <th className="cell">Status</th>
+                          <th className="cell">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {posts.filter(post => post.status === 'published').length > 0 ? (
+                          posts
+                            .filter(post => post.status === 'published')
+                            .map((post, index) => (
+                              <tr key={post.id}>
+                                <td className="cell">#{index + 1}</td>
+                                <td className="cell"><span className="truncate">{post.title}</span></td>
+                                <td className="cell"><span className="truncate">{post.content}</span></td>
+                                <td className="cell">{post.user.name}</td>
+                                <td className="cell">
+                                  <span
+                                    className={`badge ${post.status === "published"
+                                      ? "bg-success"
+                                      : post.status === "draft"
+                                        ? "bg-warning text-dark"
+                                        : "bg-secondary"
+                                      }`}
+                                  >
+                                    {post.status.charAt(0).toUpperCase() + post.status.slice(1)}
+                                  </span>
+                                </td>
+                                <td className="cell">
+                                  <button onClick={() => handleEdit(post)} className="btn-sm btn-outline-primary me-1">Edit</button>
+                                  <button onClick={() => handleShowDetailView(post)} className="btn-sm btn-outline-secondary me-1">Show</button>
+                                  <button onClick={() => handleDelete(post.id)} className="btn-sm btn-outline-danger">Delete</button>
+                                </td>
+                              </tr>
+                            ))
+                        ) : (
+                          <tr>
+                            <td className="cell text-center" colSpan="10">No users found</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <Pagination
+              currentPage={currentPage}
+              lastPage={lastPage}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
           </div>
           {/* Add/Edit Modal */}
           {showModal && (
@@ -293,6 +391,7 @@ const PostList = () => {
                             required
                           />
                         </div>
+
                         <div className="col-md-12">
                           <label className="form-label">User</label>
                           <select
@@ -301,13 +400,14 @@ const PostList = () => {
                             onChange={(e) => setForm({ ...form, user_id: e.target.value })}
                           >
                             <option value="">Select User</option>
-                            {posts.map((cat) => (
-                              <option key={cat.id} value={cat.id}>
-                                {cat.name}
+                            {users.map((user) => (
+                              <option key={user.id} value={user.id}>
+                                {user.name}
                               </option>
                             ))}
                           </select>
                         </div>
+
 
                         <div className="col-md-12">
                           <label className="form-label">Content</label>
@@ -322,8 +422,22 @@ const PostList = () => {
                           </div>
                         </div>
 
+                        <div className="col-md-12">
+                          <label className="form-label">Status</label>
+                          <select
+                            className="form-select"
+                            value={form.status || ''}
+                            onChange={(e) => setForm({ ...form, status: e.target.value })}
+                            required
+                          >
+                            <option value="">Select Status</option>
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
+
                     <div className="modal-footer">
                       <button type="button" className="btn btn-secondary" onClick={resetForm}>
                         Cancel
@@ -337,7 +451,8 @@ const PostList = () => {
               </div>
             </div>
           )}
-          <PostDetailModal Post={selectedPost} show={showDetailModal} onClose={closeShowDetailModal} />
+
+          <PostDetailModal post={selectedPost} show={showDetailModal} onClose={closeShowDetailModal} />
         </div>
       </div>
     </Layout>
@@ -345,4 +460,3 @@ const PostList = () => {
 };
 
 export default PostList;
-  
