@@ -50,7 +50,7 @@ class PostController extends BaseController
             }
 
             // Paginate results
-            $posts = $query->paginate(10);
+            $posts = $query->paginate(100);
 
             // Construct response
             return response()->json([

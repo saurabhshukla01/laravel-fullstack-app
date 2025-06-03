@@ -57,7 +57,7 @@ class CategoryController extends BaseController
             }
 
             // Paginate results
-            $categories = $query->paginate(10);
+            $categories = $query->paginate(100);
 
             $response = [
                 'success' => true,

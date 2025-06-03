@@ -52,7 +52,7 @@ class SubcategoryController extends BaseController
             }
 
             // Paginate
-            $subcategories = $query->paginate(10);
+            $subcategories = $query->paginate(100);
 
             // Return response
             $response = [
