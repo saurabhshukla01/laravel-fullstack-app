@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/subcategories', SubcategoryController::class);
     // posts api routes
     Route::apiResource('/posts', PostController::class);
+    Route::get('/comments', [CommentController::class, 'commentAllList']);
     // create comments routes api 
     Route::prefix('posts/{postId}')->group(function () {
         Route::get('comments', [CommentController::class, 'index']);

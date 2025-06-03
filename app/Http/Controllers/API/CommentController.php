@@ -7,10 +7,81 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\StatusCode;
+use Carbon\Carbon;
 use Exception;
 
 class CommentController extends BaseController
 {
+    // Get comments for All List
+    public function commentAllList(Request $request)
+    {
+        try {
+            $query = Comment::with('user', 'post');
+
+            // Filter by search input (comment.name, comment.comment, post.title, user.name)
+            if ($request->has('search') && !empty($request->search)) {
+                $searchTerm = $request->search;
+
+                $query->where(function ($q) use ($searchTerm) {
+                    $q->where('comment', 'like', '%' . $searchTerm . '%')
+                        ->orWhereHas('post', function ($q2) use ($searchTerm) {
+                            $q2->where('title', 'like', '%' . $searchTerm . '%');
+                        })
+                        ->orWhereHas('user', function ($q3) use ($searchTerm) {
+                            $q3->where('name', 'like', '%' . $searchTerm . '%');
+                        });
+                });
+            }
+
+            // Filter by created_at date range
+            if ($request->has('filter')) {
+                switch ($request->filter) {
+                    case 'option-2': // This week
+                        $query->where('created_at', '>=', Carbon::now()->startOfWeek());
+                        break;
+
+                    case 'option-3': // This month
+                        $query->where('created_at', '>=', Carbon::now()->startOfMonth());
+                        break;
+
+                    case 'option-4': // Last 3 months
+                        $query->where('created_at', '>=', Carbon::now()->subMonths(3));
+                        break;
+
+                    case 'option-1': // All
+                    default:
+                        // No filter
+                        break;
+                }
+            }
+
+            // Paginate
+            $comments = $query->paginate(100);
+
+            // Return response
+            $response = [
+                'success' => true,
+                'message' => __('messages.comment_fetched'),
+                'data' => $comments->items(),
+                'meta' => [
+                    'current_page' => $comments->currentPage(),
+                    'last_page' => $comments->lastPage(),
+                    'per_page' => $comments->perPage(),
+                    'total' => $comments->total(),
+                ],
+            ];
+
+            return response()->json($response, StatusCode::OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => __('messages.general_error'),
+                'data' => [],
+            ], StatusCode::SERVER_ERROR);
+        }
+    }
+
+
     // Get comments for a specific post
     public function index($postId)
     {
