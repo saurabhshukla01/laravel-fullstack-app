@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('comments', [CommentController::class, 'index']);
         Route::post('comments', [CommentController::class, 'store']);
     });
+    Route::post('comments', [CommentController::class, 'create']);
     Route::get('comments/{id}', [CommentController::class, 'show']);
     Route::put('comments/{id}', [CommentController::class, 'update']);
     Route::delete('comments/{id}', [CommentController::class, 'destroy']);

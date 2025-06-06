@@ -197,7 +197,7 @@ const CommentList = () => {
                           <th className="cell">Comment</th>
                           <th className="cell">User</th>
                           <th className="cell">Post</th>
-                          <th className="cell">Date</th>
+                          <th className="cell">Date at Time</th>
                           <th className="cell">Actions</th>
                         </tr>
                       </thead>
@@ -214,7 +214,9 @@ const CommentList = () => {
                                   {new Date(comment.created_at).toLocaleDateString('en-GB', {
                                     day: '2-digit',
                                     month: 'long',
-                                    year: 'numeric'
+                                    year: 'numeric',
+                                    hour: "2-digit",
+                                    minute: "2-digit"
                                   })}
                                 </span>
                               </td>

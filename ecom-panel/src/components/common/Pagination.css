@@ -1,21 +1,15 @@
-.app-pagination .pagination {
-  margin: 20px 0;
-}
-
-.page-item .page-link {
-  color: #007bff;
-  padding: 6px 12px;
-}
-
-.page-item.active .page-link {
-  background-color: #007bff;
-  color: white;
-  border-color: #007bff;
-}
-
-.page-item.disabled .page-link {
-  color: #6c757d;
+.app-pagination .page-item.disabled .page-link {
+  color: #ccc;
   pointer-events: none;
-  background-color: #f8f9fa;
-  border-color: #dee2e6;
+}
+
+.app-pagination .page-item.active .page-link {
+  background-color: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
+
+.app-pagination .page-link {
+  margin: 0 3px;
+  padding: 0.5rem 0.75rem;
 }

@@ -1,81 +1,86 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './Pagination.css';
 
 const Pagination = ({ currentPage, lastPage, onPageChange }) => {
-  const getPageNumbers = () => {
+  const generatePageNumbers = () => {
+    const totalVisiblePages = 12;
     const pages = [];
 
-    if (lastPage <= 4) {
-      // show all if total pages are 4 or less
-      for (let i = 1; i <= lastPage; i++) {
-        pages.push(i);
-      }
-    } else {
-      // more than 4 pages
-      if (currentPage <= 2) {
-        pages.push(1, 2, 3, 4);
-      } else if (currentPage >= lastPage - 1) {
-        pages.push(lastPage - 3, lastPage - 2, lastPage - 1, lastPage);
-      } else {
-        pages.push(currentPage - 1, currentPage, currentPage + 1, currentPage + 2);
-      }
+    // Always include the first page
+    pages.push(1);
+
+    let startPage = Math.max(currentPage - Math.floor((totalVisiblePages - 4) / 2), 2);
+    let endPage = startPage + totalVisiblePages - 3; // -3: first + 2 last
+
+    // Adjust end if it exceeds lastPage - 2
+    if (endPage >= lastPage - 1) {
+      endPage = lastPage - 1;
+      startPage = Math.max(endPage - (totalVisiblePages - 3), 2);
+    }
+
+    // Middle pages
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    // Always include last 2 pages if not already in
+    if (lastPage > 1) {
+      if (lastPage - 1 !== pages[pages.length - 1]) pages.push(lastPage - 1);
+      if (lastPage !== pages[pages.length - 1]) pages.push(lastPage);
     }
 
     return pages;
   };
 
-  const pageNumbers = getPageNumbers();
+  const pageNumbers = generatePageNumbers();
 
   return (
     <nav className="app-pagination">
       <ul className="pagination justify-content-center">
-
         {/* Previous Button */}
         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-          <Link
+          <a
             className="page-link"
-            to="#"
+            href="#"
             onClick={(e) => {
               e.preventDefault();
               if (currentPage > 1) onPageChange(currentPage - 1);
             }}
           >
-            &laquo;
-          </Link>
+            Previous
+          </a>
         </li>
 
         {/* Page Numbers */}
-        {pageNumbers.map((num) => (
+        {pageNumbers.map((page, index) => (
           <li
-            key={num}
-            className={`page-item ${currentPage === num ? 'active' : ''}`}
+            key={index}
+            className={`page-item ${page === currentPage ? 'active' : ''}`}
           >
-            <Link
+            <a
               className="page-link"
-              to="#"
+              href="#"
               onClick={(e) => {
                 e.preventDefault();
-                onPageChange(num);
+                onPageChange(page);
               }}
             >
-              {num}
-            </Link>
+              {page}
+            </a>
           </li>
         ))}
 
         {/* Next Button */}
         <li className={`page-item ${currentPage === lastPage ? 'disabled' : ''}`}>
-          <Link
+          <a
             className="page-link"
-            to="#"
+            href="#"
             onClick={(e) => {
               e.preventDefault();
               if (currentPage < lastPage) onPageChange(currentPage + 1);
             }}
           >
-            &raquo;
-          </Link>
+            Next
+          </a>
         </li>
       </ul>
     </nav>

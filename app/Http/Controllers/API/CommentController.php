@@ -118,6 +118,32 @@ class CommentController extends BaseController
         }
     }
 
+    // Create a comment for a specific post & user
+    public function create(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'post_id' => 'required|exists:posts,id',
+                'user_id' => 'required|exists:users,id',
+                'comment' => 'required|string'
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError(__('messages.validation_error'), $validator->errors(), StatusCode::VALIDATION_ERROR);
+            }
+
+            $comment = Comment::create([
+                'post_id' => $request->post_id,
+                'user_id' => $request->user_id,
+                'comment' => $request->comment,
+            ]);
+
+            return $this->sendResponse($comment, __('messages.comment_created'), StatusCode::CREATED);
+        } catch (Exception $e) {
+            return $this->sendError(__('messages.general_error'), [], StatusCode::SERVER_ERROR);
+        }
+    }
+
     // Show a single comment
     public function show($id)
     {
