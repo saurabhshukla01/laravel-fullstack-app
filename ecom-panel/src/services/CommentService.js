@@ -6,18 +6,6 @@ const API_URL = 'http://127.0.0.1:8000/api/comments'; // Adjust endpoint as need
 
 const getToken = () => sessionStorage.getItem('token');
 
-const getDropdownPosts = async () => {
-  const token = sessionStorage.getItem('token');
-
-  const response = await axios.get(`${API_URL}?is_dropdown=1`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  return response.data;
-};
-
 const getAllComments = async (page = 1, filter = '', search = '') => {
   const token = sessionStorage.getItem('token');
 
@@ -58,7 +46,6 @@ const deleteComment = async (id) => {
 
 // ✅ This resolves the warning
 const CommentService = {
-  getDropdownPosts,
   getAllComments,
   createComment,
   updateComment,

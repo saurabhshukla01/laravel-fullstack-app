@@ -6,6 +6,18 @@ const API_URL = 'http://127.0.0.1:8000/api/posts'; // Adjust endpoint as needed
 
 const getToken = () => sessionStorage.getItem('token');
 
+const getDropdownPosts = async () => {
+  const token = sessionStorage.getItem('token');
+
+  const response = await axios.get(`${API_URL}?is_dropdown=1`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+};
+
 const getAllPosts = async (page = 1, filter = '', search = '') => {
   const token = sessionStorage.getItem('token');
 
@@ -46,6 +58,7 @@ const deletePost = async (id) => {
 
 // ✅ This resolves the warning
 const PostService = {
+  getDropdownPosts,
   getAllPosts,
   createPost,
   updatePost,

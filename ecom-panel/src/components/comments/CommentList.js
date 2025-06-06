@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import CommentService from '../../services/CommentService';
 import CommentDetailModal from './CommentDetailModal';
 import Pagination from '../common/Pagination';
+import UserService from '../../services/UserService';
+import PostService from '../../services/PostService';
 const CommentList = () => {
   const [comments, setComments] = useState([]);
   const [form, setForm] = useState({ name: '', description: '' });
@@ -17,6 +19,8 @@ const CommentList = () => {
   const [lastPage, setLastPage] = useState(1);
   const [filter, setFilter] = useState('option-1');
   const [search, setSearch] = useState('');
+  const [users, setUsers] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   const fetchComments = async (page = 1, selectedFilter = filter, searchTerm = search) => {
     try {
@@ -29,11 +33,24 @@ const CommentList = () => {
     }
   };
 
+  const fetchUsersAndPosts = async () => {
+    try {
+      const [userRes, postRes] = await Promise.all([
+        UserService.getDropdownUsers(),
+        PostService.getDropdownPosts()
+      ]);
+      setUsers(userRes.data);
+      setPosts(postRes.data);
+    } catch (error) {
+      toast.error('Failed to load users or posts');
+    }
+  };
+
   useEffect(() => {
+    fetchUsersAndPosts();
     fetchComments(currentPage, filter, search);
     // eslint-disable-next-line
   }, [currentPage, filter, search]);
-
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -47,9 +64,9 @@ const CommentList = () => {
   };
 
 
-  const handleShowDetailView = (user) => {
-    setSelectedComment(user);
-    setShowDetailModal(true);
+  const handleShowDetailView = (comment) => {
+    setSelectedComment(comment);  // ✅ Sets the data to display
+    setShowDetailModal(true);    // ✅ Triggers the modal to show
   };
 
   const closeShowDetailModal = () => {
@@ -58,44 +75,47 @@ const CommentList = () => {
   };
 
   const resetForm = () => {
-    setForm({ name: '', description: '' });
+    setForm({ comment: '', user_id: '', post_id: '' });
     setEditId(null);
     setShowModal(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!form.comment || !form.user_id || !form.post_id) {
+      toast.error('Please fill in all fields');
+      return;
+    }
     try {
-      if (!form.name || !form.description) {
-        toast.error('Please fill in all required fields');
-        return;
-      }
+      const payload = {
+        comment: form.comment,
+        user_id: parseInt(form.user_id, 10),
+        post_id: parseInt(form.post_id, 10),
+      };
+
 
       if (editId) {
-        await CommentService.updateComment(editId, form);
+        await CommentService.updateComment(editId, payload);
         toast.success('Comment updated successfully');
       } else {
-        await CommentService.createComment(form);
+        await CommentService.createComment(payload);
         toast.success('Comment created successfully');
       }
       resetForm();
       fetchComments();
     } catch (err) {
-      toast.error('Failed to save user');
+      toast.error('Failed to save comment');
     }
   };
 
-  const handleEdit = async (Comment) => {
-    try {
-      setEditId(Comment.id); // set edit mode
-      setForm({
-        name: Comment.name || '',
-        description: Comment.description || ''
-      });
-      setShowModal(true);
-    } catch (error) {
-      toast.error('Failed to fetch user details',error);
-    }
+  const handleEdit = (comment) => {
+    setEditId(comment.id);
+    setForm({
+      comment: comment.comment || '',
+      user_id: comment.user.id || '',
+      post_id: comment.post.id || '',
+    });
+    setShowModal(true);
   };
 
   const handleDelete = async (id) => {
@@ -240,12 +260,8 @@ const CommentList = () => {
           </div>
           {/* Add/Edit Modal */}
           {showModal && (
-            <div
-              className="modal fade show d-block"
-              tabIndex="-1"
-              style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
-            >
-              <div className="modal-dialog modal-xl">
+            <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+              <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                   <div className="modal-header">
                     <h5 className="modal-title">{editId ? 'Edit Comment' : 'Add Comment'}</h5>
@@ -254,38 +270,53 @@ const CommentList = () => {
                   <form onSubmit={handleSubmit}>
                     <div className="modal-body">
                       <div className="row g-3">
-                        <div className="col-md-12">
-                          <label className="form-label">Name</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={form.name}
-                            onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        <div className="col-md-6">
+                          <label>User</label>
+                          <select
+                            className="form-select"
+                            value={form.user_id}
+                            onChange={(e) => setForm({ ...form, user_id: e.target.value })}
                             required
-                          />
+                            disabled={!!editId} // Disable in edit mode
+                          >
+                            <option value="">Select User</option>
+                            {users.map(user => (
+                              <option key={user.id} value={user.id}>{user.name}</option>
+                            ))}
+                          </select>
+
+                        </div>
+                        <div className="col-md-6">
+                          <label>Post</label>
+                          <select
+                            className="form-select"
+                            value={form.post_id}
+                            onChange={(e) => setForm({ ...form, post_id: e.target.value })}
+                            required
+                            disabled={!!editId} // Disable in edit mode
+                          >
+                            <option value="">Select Post</option>
+                            {posts.map(post => (
+                              <option key={post.id} value={post.id}>{post.title}</option>
+                            ))}
+                          </select>
+
                         </div>
                         <div className="col-md-12">
-                          <label className="form-label">Description</label>
+                          <label>Comment</label>
                           <textarea
                             className="form-control"
-                            value={form.description}
-                            onChange={(e) => setForm({ ...form, description: e.target.value })}
+                            value={form.comment}
+                            onChange={(e) => setForm({ ...form, comment: e.target.value })}
                             required
-                          />
-                          <div className="form-text">
-                            Please update the description to reflect the latest details of this Comment.
-                          </div>
+                          ></textarea>
                         </div>
-
                       </div>
                     </div>
                     <div className="modal-footer">
-                      <button type="button" className="btn btn-secondary" onClick={resetForm}>
-                        Cancel
-                      </button>
-                      <button type="submit" className="btn btn-primary">
-                        {editId ? 'Update' : 'Add'} Comment
-                      </button>
+                      <button type="button" className="btn btn-secondary" onClick={resetForm}>Cancel</button>
+                      <button type="submit" className="btn btn-primary" disabled={!users.length || !posts.length}>
+                        {editId ? 'Update' : 'Add'} Comment</button>
                     </div>
                   </form>
                 </div>
